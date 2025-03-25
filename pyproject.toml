@@ -1,0 +1,9 @@
+[project]
+authors = [{ name = "WangWindow", email = "1598593280@qq.com" }]
+dependencies = ["django >= 5.1.0", "requests"]
+description = "Django app."
+license = { file = "MIT" }
+name = "elepathy"
+readme = "README.md"
+requires-python = ">=3.12"
+version = "0.1.0"
