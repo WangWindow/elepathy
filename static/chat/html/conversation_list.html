@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/home/css/style.css">
+    <link rel="stylesheet" href="/static/chat/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo">
+                <h1>Elepathy</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/chat" class="active"><i class="fas fa-comments"></i> 智能对话</a></li>
+                    <li><a href="/tools/"><i class="fas fa-tools"></i> 工具箱</a></li>
+                    <li><a href="/team"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero hero-team">
+        <div class="container">
+            <div class="hero-content">
+                <h2>Elepathy 对话列表</h2>
+                <p>{{ description }}</p>
+                <div style="margin-top: 20px;">
+                    <a href="{% url 'chat:new_chat' %}" class="btn primary btn-action btn-create">
+                        <i class="fas fa-plus"></i> 新建对话
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="conversation-list" class="features">
+        <div class="container">
+            <div class="conversation-grid">
+                {% if conversations %}
+                {% for conv in conversations %}
+                <div class="conversation-card" data-id="{{ conv.id }}">
+                    <div class="conversation-title">
+                        <h3>{{ conv.title }}</h3>
+                        <span class="conversation-date">{{ conv.updated_at|date:"Y-m-d H:i" }}</span>
+                    </div>
+                    <div class="hover-actions">
+                        <a href="{% url 'chat:chat' conv.id %}" class="btn-action btn-create">
+                            <i class="fas fa-comment"></i> 继续对话
+                        </a>
+                        <button class="btn-action btn-delete delete-btn" data-id="{{ conv.id }}">
+                            <i class="fas fa-trash"></i> 删除
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>没有对话记录</h3>
+                    <p>开始一个新的对话，探索AI的强大能力</p>
+                    <a href="{% url 'chat:new_chat' %}" class="btn primary btn-action btn-create">
+                        <i class="fas fa-plus"></i> 新建对话
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- 浮动创建按钮 -->
+    <a href="{% url 'chat:new_chat' %}" class="floating-btn" title="新建对话">
+        <i class="fas fa-plus"></i>
+    </a>
+
+    <!-- 删除确认对话框 -->
+    <div id="delete-confirm" class="confirm-dialog">
+        <div class="confirm-dialog-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> 确认删除</h3>
+            <p>您确定要删除这个对话吗？此操作无法撤销，将永久删除所有对话内容。</p>
+            <div class="confirm-dialog-actions">
+                <button id="cancel-delete" class="btn secondary">取消</button>
+                <button id="confirm-delete" class="btn-action btn-delete">确认删除</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Elepathy Teams. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 当前要删除的对话ID
+        let currentDeleteId = null;
+        const deleteConfirmDialog = document.getElementById('delete-confirm');
+        const confirmDeleteBtn = document.getElementById('confirm-delete');
+        const cancelDeleteBtn = document.getElementById('cancel-delete');
+
+        // 删除对话功能 - 显示确认对话框
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+
+                const id = e.target.closest('.delete-btn').dataset.id;
+                currentDeleteId = id;
+
+                // 显示确认对话框
+                deleteConfirmDialog.style.display = 'flex';
+            });
+        });
+
+        // 取消删除
+        cancelDeleteBtn.addEventListener('click', () => {
+            deleteConfirmDialog.style.display = 'none';
+            currentDeleteId = null;
+        });
+
+        // 点击对话框外部关闭
+        deleteConfirmDialog.addEventListener('click', (e) => {
+            if (e.target === deleteConfirmDialog) {
+                deleteConfirmDialog.style.display = 'none';
+                currentDeleteId = null;
+            }
+        });
+
+        // 确认删除
+        confirmDeleteBtn.addEventListener('click', async () => {
+            if (!currentDeleteId) {
+                deleteConfirmDialog.style.display = 'none';
+                return;
+            }
+
+            try {
+                // 显示删除中状态
+                confirmDeleteBtn.disabled = true;
+                confirmDeleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 删除中...';
+
+                const response = await fetch(`/chat/${currentDeleteId}/delete/`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCsrfToken(),
+                    }
+                });
+
+                if (response.ok) {
+                    // 删除成功，关闭对话框
+                    deleteConfirmDialog.style.display = 'none';
+
+                    // 添加删除动画
+                    const card = document.querySelector(`.conversation-card[data-id="${currentDeleteId}"]`);
+                    if (card) {
+                        card.style.transform = 'translateX(100%)';
+                        card.style.opacity = '0';
+
+                        // 动画结束后移除元素
+                        setTimeout(() => {
+                            card.remove();
+
+                            // 如果全部删除了，显示空状态
+                            if (document.querySelectorAll('.conversation-card').length === 0) {
+                                location.reload();
+                            }
+                        }, 300);
+                    }
+                } else {
+                    throw new Error('请求失败');
+                }
+            } catch (error) {
+                console.error('删除对话出错:', error);
+                alert('删除失败，请稍后重试');
+            } finally {
+                // 重置按钮状态
+                confirmDeleteBtn.disabled = false;
+                confirmDeleteBtn.innerHTML = '确认删除';
+                currentDeleteId = null;
+            }
+        });
+
+        /**
+         * 获取CSRF Token
+         */
+        function getCsrfToken() {
+            const cookieValue = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken='))
+                ?.split('=')[1];
+
+            return cookieValue || '';
+        }
+    </script>
+</body>
+
+</html>

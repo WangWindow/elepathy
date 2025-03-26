@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/home/css/style.css">
+    <link rel="stylesheet" href="/static/chat/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body class="with-sidebar">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo">
+                <h1>Elepathy</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/chat" class="active"><i class="fas fa-comments"></i> 智能对话</a></li>
+                    <li><a href="/tools/"><i class="fas fa-tools"></i> 工具箱</a></li>
+                    <li><a href="/team"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="chat-layout">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>对话列表</h3>
+                <a href="{% url 'chat:new_chat' %}" class="new-chat-btn" title="新建对话">
+                    <i class="fas fa-plus"></i>
+                </a>
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            <div class="conversations-list">
+                <a href="{% url 'chat:new_chat' %}" class="conversation-item new-chat">
+                    <i class="fas fa-plus"></i> 新建对话
+                </a>
+                {% for conv in conversations %}
+                <a href="{% url 'chat:chat' conv.id %}"
+                    class="conversation-item {% if conv.id == conversation.id %}active{% endif %}">
+                    <div class="conversation-info">
+                        <span class="conversation-title">{{ conv.title }}</span>
+                        <span class="conversation-date">{{ conv.updated_at|date:"m-d H:i" }}</span>
+                    </div>
+                    <div class="conversation-actions">
+                        <button class="rename-btn" data-id="{{ conv.id }}" title="重命名">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="delete-btn" data-id="{{ conv.id }}" title="删除">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </aside>
+
+        <!-- 主聊天区域 -->
+        <main class="chat-main">
+            <section class="chat-container">
+                <div class="chat-header">
+                    <div class="status"></div>
+                    <h3 id="conversation-title" data-id="{{ conversation.id }}">{{ conversation.title }}
+                        <small>(由DeepSeek驱动)</small></h3>
+                    <div class="header-actions">
+                        <button id="rename-conversation" title="重命名对话">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button id="clear-conversation" title="清空对话内容">
+                            <i class="fas fa-broom"></i>
+                        </button>
+                        <button id="delete-conversation" class="delete-btn" data-id="{{ conversation.id }}"
+                            title="删除对话">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+                <div id="chat-messages" class="chat-messages">
+                    <!-- 现有消息 -->
+                    {% for message in messages %}
+                    <div class="message {% if message.role == 'assistant' %}bot{% else %}user{% endif %}">
+                        {{ message.content|linebreaksbr }}
+                        <div class="avatar">{% if message.role == 'assistant' %}E{% else %}U{% endif %}</div>
+                    </div>
+                    {% empty %}
+                    <div class="message bot first-message">
+                        你好！我是Elepathy智能助手，很高兴为您服务。我可以回答问题、提供信息，或者聊聊天。请告诉我您需要什么帮助？
+                        <div class="avatar">E</div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="message-input" placeholder="输入您的问题或消息...">
+                    <button id="send-button">
+                        <i class="fas fa-paper-plane"></i> 发送
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 重命名对话的模态框 -->
+    <div id="rename-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h3>重命名对话</h3>
+            <div class="form-group">
+                <input type="text" id="new-title" placeholder="输入新的对话标题">
+            </div>
+            <div class="form-actions">
+                <button id="cancel-rename" class="btn secondary">取消</button>
+                <button id="confirm-rename" class="btn primary">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 删除确认对话框 -->
+    <div id="delete-confirm" class="confirm-dialog">
+        <div class="confirm-dialog-content">
+            <h3><i class="fas fa-exclamation-triangle"></i> 确认删除</h3>
+            <p>您确定要删除这个对话吗？此操作无法撤销，将永久删除所有对话内容。</p>
+            <div class="confirm-dialog-actions">
+                <button id="cancel-delete" class="btn secondary">取消</button>
+                <button id="confirm-delete" class="btn-action btn-delete">确认删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 浮动新建按钮 - 仅在移动设备上显示 -->
+    <a href="{% url 'chat:new_chat' %}" class="floating-btn" title="新建对话" id="floating-new-chat">
+        <i class="fas fa-plus"></i>
+    </a>
+
+    <script>
+        // 当前对话ID
+        const conversationId = '{{ conversation.id }}';
+    </script>
+    <script src="/static/chat/js/main.js"></script>
+</body>
+
+</html>
