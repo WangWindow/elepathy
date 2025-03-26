@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 
-<body class="with-sidebar">
+<body>
     <header>
         <div class="container">
             <div class="logo">
@@ -70,7 +70,8 @@
                 <div class="chat-header">
                     <div class="status"></div>
                     <h3 id="conversation-title" data-id="{{ conversation.id }}">{{ conversation.title }}
-                        <small>(由DeepSeek驱动)</small></h3>
+                        <small>(由DeepSeek驱动)</small>
+                    </h3>
                     <div class="header-actions">
                         <button id="rename-conversation" title="重命名对话">
                             <i class="fas fa-edit"></i>
@@ -88,8 +89,8 @@
                     <!-- 现有消息 -->
                     {% for message in messages %}
                     <div class="message {% if message.role == 'assistant' %}bot{% else %}user{% endif %}">
-                        {{ message.content|linebreaksbr }}
                         <div class="avatar">{% if message.role == 'assistant' %}E{% else %}U{% endif %}</div>
+                        {{ message.content|linebreaksbr }}
                     </div>
                     {% empty %}
                     <div class="message bot first-message">
@@ -98,13 +99,13 @@
                     </div>
                     {% endfor %}
                 </div>
-                <div class="chat-input">
-                    <input type="text" id="message-input" placeholder="输入您的问题或消息...">
-                    <button id="send-button">
-                        <i class="fas fa-paper-plane"></i> 发送
-                    </button>
-                </div>
             </section>
+            <div class="chat-input">
+                <input type="text" id="message-input" placeholder="输入您的问题或消息...">
+                <button id="send-button">
+                    <i class="fas fa-paper-plane"></i> 发送
+                </button>
+            </div>
         </main>
     </div>
 

@@ -145,7 +145,6 @@ if (clearConversationButton) {
             chatMessages.innerHTML = `
                 <div class="message bot first-message">
                     你好！我是Elepathy智能助手，很高兴为您服务。我可以回答问题、提供信息，或者聊聊天。请告诉我您需要什么帮助？
-                    <div class="avatar">E</div>
                 </div>
             `;
 
@@ -385,8 +384,8 @@ function addUserMessage(message) {
     const messageText = formatMessageText(message);
 
     messageElement.innerHTML = `
-        ${messageText}
         <div class="avatar">U</div>
+        ${messageText}
     `;
 
     chatMessages.appendChild(messageElement);
@@ -406,8 +405,8 @@ function addBotMessage(message, isFirstMessage = false) {
     const messageText = formatMessageText(message);
 
     messageElement.innerHTML = `
-        ${messageText}
         <div class="avatar">E</div>
+        ${messageText}
     `;
 
     chatMessages.appendChild(messageElement);
@@ -425,12 +424,12 @@ function addTypingIndicator() {
     messageElement.id = id;
 
     messageElement.innerHTML = `
+        <div class="avatar">E</div>
         <div class="typing-indicator">
             <span></span>
             <span></span>
             <span></span>
         </div>
-        <div class="avatar">E</div>
     `;
 
     chatMessages.appendChild(messageElement);
