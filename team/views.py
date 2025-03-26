@@ -6,19 +6,19 @@
  * @LastEditors: WangWindow 1598593280@qq.com
  * @LastEditTime: 2025-03-26 11:12:02
  * @Copyright © 2025 WangWindow
- * @Descripttion: 首页视图
+ * @Descripttion:
 ==============================================================================
 """
 
 from django.shortcuts import render
 
 
-def home(request):
+def view(request):
     """
-    首页视图
+    团队页面视图
     """
     context = {
-        "title": "Elepathy - 智慧共情的力量",
-        "description": "通过强大的记忆力和深刻的情感理解力，提供智能、人性化、可靠的工具和服务。",
+        "title": "Elepathy 团队 - 共同构建智慧共情的未来",
+        "description": "了解 Elepathy 背后的创新团队，我们致力于创造智能、人性化的工具和服务。",
     }
-    return render(request, "home/html/index.html", context)
+    return render(request, "team/html/index.html", context)

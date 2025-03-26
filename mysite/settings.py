@@ -45,8 +45,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "home.apps.HomeConfig",  # Add home app
-    # "tools.apps.ToolsConfig",  # Add tools app
+    "home.apps.HomeConfig",
+    # "team.apps.TeamConfig",
+    # "tools.apps.ToolsConfig",
 ]
 
 MIDDLEWARE = [
@@ -64,7 +65,7 @@ ROOT_URLCONF = "mysite.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [BASE_DIR / "static"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [

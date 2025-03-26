@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/home/css/style.css">
+    <link rel="stylesheet" href="/static/team/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo">
+                <h1>Elepathy</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> 首页</a></li>
+                    <li><a href="/tools/"><i class="fas fa-tools"></i> 工具箱</a></li>
+                    <li><a href="/team" class="active"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero hero-team">
+        <div class="container">
+            <div class="hero-content">
+                <h2>我们的团队</h2>
+                <p>{{ description }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="team-intro" class="about">
+        <div class="container">
+            <h2>关于我们</h2>
+            <p>Elepathy 由一群热爱科技和充满创意的开发者组成。我们相信通过智能技术和人性化设计，可以创造出真正改善用户体验的产品。
+                团队成员来自不同背景，拥有多样的技能和经验，但我们有着共同的目标：打造优秀的工具，帮助用户更高效地工作和生活。</p>
+        </div>
+    </section>
+
+    <section id="team-values" class="features">
+        <div class="container">
+            <h2>我们的价值观</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>创新精神</h3>
+                    <p>不断探索新的解决方案，挑战现状</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>团队协作</h3>
+                    <p>相信集体的智慧可以创造更大的价值</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-user-shield"></i>
+                    <h3>用户至上</h3>
+                    <p>以用户需求为中心，提供卓越的体验</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-globe"></i>
+                    <h3>开放共享</h3>
+                    <p>拥抱开源精神，共同推动技术进步</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="team-members" class="team">
+        <div class="container">
+            <h2>团队成员</h2>
+            <p>认识为 Elepathy 贡献才智的核心团队成员。</p>
+            <div class="team-members">
+                <!-- 硬编码团队成员数据，不使用模型 -->
+                <div class="team-member">
+                    <img src="/static/images/team/avatar-1.png" alt="王weidong的头像">
+                    <h3>王weidong</h3>
+                    <p>创始人 & 首席开发者</p>
+                    <div class="social-links">
+                        <a href="https://github.com/WangWindow" target="_blank" aria-label="GitHub链接"><i
+                                class="fab fa-github"></i></a>
+                        <a href="mailto:1598593280@qq.com" aria-label="发送邮件"><i class="fas fa-envelope"></i></a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/static/images/team/avatar-2.webp" alt="袁xueyu的头像">
+                    <h3>袁xueyu</h3>
+                    <p>前端开发</p>
+                    <div class="social-links">
+                        <!-- 无社交链接 -->
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/static/images/team/avatar-3.webp" alt="董jiaxuan的头像">
+                    <h3>董jiaxuan</h3>
+                    <p>后端开发</p>
+                    <div class="social-links">
+                        <!-- 无社交链接 -->
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/static/images/team/avatar-4.webp" alt="陈xi的头像">
+                    <h3>陈xi</h3>
+                    <p>UI/UX 设计</p>
+                    <div class="social-links">
+                        <!-- 无社交链接 -->
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <img src="/static/images/team/avatar-5.webp" alt="周zuowei的头像">
+                    <h3>周zuowei</h3>
+                    <p>系统运维</p>
+                    <div class="social-links">
+                        <!-- 无社交链接 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="join-us" class="about">
+        <div class="container">
+            <h2>加入我们</h2>
+            <p>我们始终在寻找对技术充满热情、富有创造力的人才加入我们的团队。
+                如果您对我们的项目感兴趣，或者有合作意向，欢迎随时与我们联系。</p>
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="mailto:1598593280@qq.com" class="btn primary"><i class="fas fa-paper-plane"></i> 联系我们</a>
+                <a href="https://github.com/WangWindow" target="_blank" class="btn secondary"><i
+                        class="fab fa-github"></i> 访问 GitHub</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Elepathy Teams. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/static/home/js/main.js"></script>
+</body>
+
+</html>
