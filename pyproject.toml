@@ -1,6 +1,6 @@
 [project]
 authors = [{ name = "WangWindow", email = "1598593280@qq.com" }]
-dependencies = ["django >= 5.1.0", "requests", "openai"]
+dependencies = ["django >= 5.1.0", "requests", "openai", "pillow"]
 description = "Django app."
 license = { file = "MIT" }
 name = "elepathy"

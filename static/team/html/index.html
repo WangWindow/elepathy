@@ -78,53 +78,29 @@
             <h2>团队成员</h2>
             <p>认识为 Elepathy 贡献才智的核心团队成员。</p>
             <div class="team-members">
-                <!-- 硬编码团队成员数据，不使用模型 -->
+                {% for member in team_members %}
                 <div class="team-member">
-                    <img src="/static/images/team/avatar-1.png" alt="王weidong的头像">
-                    <h3>王weidong</h3>
-                    <p>创始人 & 首席开发者</p>
+                    <img src="{{ member.avatar_path }}" alt="{{ member.name }}的头像">
+                    <h3>{{ member.name }}</h3>
+                    <p>{{ member.role }}</p>
+                    {% if member.bio %}
+                    <p class="member-bio">{{ member.bio }}</p>
+                    {% endif %}
                     <div class="social-links">
-                        <a href="https://github.com/WangWindow" target="_blank" aria-label="GitHub链接"><i
+                        {% if member.github_url %}
+                        <a href="{{ member.github_url }}" target="_blank" aria-label="GitHub链接"><i
                                 class="fab fa-github"></i></a>
-                        <a href="mailto:1598593280@qq.com" aria-label="发送邮件"><i class="fas fa-envelope"></i></a>
+                        {% endif %}
+                        {% if member.email %}
+                        <a href="mailto:{{ member.email }}" aria-label="发送邮件"><i class="fas fa-envelope"></i></a>
+                        {% endif %}
                     </div>
                 </div>
-
-                <div class="team-member">
-                    <img src="/static/images/team/avatar-2.webp" alt="袁xueyu的头像">
-                    <h3>袁xueyu</h3>
-                    <p>前端开发</p>
-                    <div class="social-links">
-                        <!-- 无社交链接 -->
-                    </div>
+                {% empty %}
+                <div class="empty-state">
+                    <p>暂无团队成员信息</p>
                 </div>
-
-                <div class="team-member">
-                    <img src="/static/images/team/avatar-3.webp" alt="董jiaxuan的头像">
-                    <h3>董jiaxuan</h3>
-                    <p>后端开发</p>
-                    <div class="social-links">
-                        <!-- 无社交链接 -->
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <img src="/static/images/team/avatar-4.webp" alt="陈xi的头像">
-                    <h3>陈xi</h3>
-                    <p>UI/UX 设计</p>
-                    <div class="social-links">
-                        <!-- 无社交链接 -->
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <img src="/static/images/team/avatar-5.webp" alt="周zuowei的头像">
-                    <h3>周zuowei</h3>
-                    <p>系统运维</p>
-                    <div class="social-links">
-                        <!-- 无社交链接 -->
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>

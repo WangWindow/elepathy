@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "home.apps.HomeConfig",
     "chat.apps.ChatConfig",
-    # "team.apps.TeamConfig",
+    "team.apps.TeamConfig",
     # "tools.apps.ToolsConfig",
 ]
 
@@ -89,7 +89,7 @@ WSGI_APPLICATION = "mysite.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "mysite/db.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
 
