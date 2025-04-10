@@ -7,6 +7,7 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
 </head>
 
 <body class="font-sans text-text leading-relaxed bg-light-gray antialiased">
@@ -211,20 +212,11 @@
 
     <footer class="bg-dark-color text-white py-12 text-center">
         <div class="container w-[90%] max-w-[1200px] mx-auto px-4">
-            <div class="flex flex-col md:flex-row items-center justify-center md:justify-between mb-10">
-                <div class="mb-6 md:mb-0 flex items-center">
-                    <a href="/" class="flex items-center hover:opacity-90 transition">
-                        <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo"
-                            class="h-[40px] mr-4 filter brightness-150">
-                        <h2 class="text-xl font-bold tracking-tighter">Elepathy</h2>
-                    </a>
-                </div>
-                <div class="flex flex-wrap justify-center gap-8">
-                    <a href="/" class="text-white hover:text-primary-300 transition duration-300">首页</a>
-                    <a href="/chat" class="text-white hover:text-primary-300 transition duration-300">智能对话</a>
-                    <a href="/tools" class="text-white hover:text-primary-300 transition duration-300">工具箱</a>
-                    <a href="/team" class="text-white hover:text-primary-300 transition duration-300">关于我们</a>
-                </div>
+            <div
+                class="flex flex-col md:flex-row items-center justify-center md:justify-between mb-10 border-t border-gray-700 pt-6 text-center">
+                <p
+                    class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition opacity-70 text-sm">
+                    &copy; 2025 Elepathy Teams. All rights reserved.</p>
                 <div class="flex space-x-4 mt-6 md:mt-0">
                     <a href="https://github.com/WangWindow" target="_blank"
                         class="w-10 h-10 rounded-full bg-dark-color border border-gray-700 text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
@@ -235,9 +227,6 @@
                         <i class="fas fa-envelope"></i>
                     </a>
                 </div>
-            </div>
-            <div class="border-t border-gray-700 pt-6 text-center">
-                <p class="opacity-70 text-sm">&copy; 2025 Elepathy Teams. All rights reserved.</p>
             </div>
         </div>
     </footer>

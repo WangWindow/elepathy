@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <meta name="color-scheme" content="light dark">
 </head>
 
 <body class="font-sans text-text leading-relaxed bg-light-gray">
@@ -46,7 +48,7 @@
     <div class="flex relative overflow-hidden h-[calc(100vh-80px)]">
         <!-- 侧边栏 -->
         <aside
-            class="w-[300px] bg-[#f8f9fa] border-r border-[#e1e4e8] flex flex-col transition-transform duration-300 overflow-hidden h-full transform md:absolute md:top-0 md:left-0 md:h-full md:z-10 md:-translate-x-full md:group-[.open]:translate-x-0">
+            class="w-[300px] bg-white border-r border-[#e1e4e8] flex flex-col transition-transform duration-300 overflow-hidden h-full transform md:absolute md:top-0 md:left-0 md:h-full md:z-10 md:-translate-x-full md:group-[.open]:translate-x-0">
             <div class="p-4 border-b border-[#e1e4e8] flex justify-between items-center">
                 <h3 class="m-0 text-base font-semibold">对话列表</h3>
                 <a href="{% url 'chat:new_chat' %}"
@@ -116,28 +118,23 @@
                         </button>
                     </div>
                 </div>
-                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 flex flex-col gap-3">
+                <!-- 新的消息容器，使用自定义CSS样式 -->
+                <div id="chat-messages" class="flex-1 overflow-y-auto p-4 message-container">
                     <!-- 现有消息 -->
                     {% for message in messages %}
                     <div
-                        class="message max-w-[80%] flex items-start relative leading-normal text-base animate-[fadeIn_0.3s_ease-in-out] mb-4 {% if message.role == 'assistant' %}self-start mr-auto{% else %}self-end ml-auto flex-row-reverse{% endif %}">
-                        <div
-                            class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0 relative {% if message.role == 'assistant' %}bg-[#5a67d8] text-white mr-2.5{% else %}bg-primary text-white ml-2.5{% endif %}">
+                        class="{% if message.role == 'assistant' %}bot-message{% else %}user-message{% endif %} animate-fade-in">
+                        <div class="avatar">
                             {% if message.role == 'assistant' %}E{% else %}U{% endif %}
                         </div>
-                        <div
-                            class="p-3 rounded-[15px] max-w-[calc(100%-45px)] break-words {% if message.role == 'assistant' %}bg-[#eef2ff] text-text rounded-tl-[4px]{% else %}bg-primary text-white rounded-tr-[4px]{% endif %}">
+                        <div class="content">
                             {{ message.content|linebreaksbr }}
                         </div>
                     </div>
                     {% empty %}
-                    <div
-                        class="message max-w-[80%] flex items-start relative leading-normal text-base animate-[fadeIn_0.3s_ease-in-out] mb-4 self-start mr-auto first-message italic opacity-70">
-                        <div
-                            class="w-9 h-9 rounded-full flex items-center justify-center text-sm flex-shrink-0 relative bg-[#5a67d8] text-white mr-2.5">
-                            E</div>
-                        <div
-                            class="p-3 rounded-[15px] max-w-[calc(100%-45px)] break-words bg-[#eef2ff] text-text rounded-tl-[4px]">
+                    <div class="bot-message animate-fade-in">
+                        <div class="avatar">E</div>
+                        <div class="content">
                             你好！我是Elepathy智能助手，很高兴为您服务。我可以回答问题、提供信息，或者聊聊天。请告诉我您需要什么帮助？
                         </div>
                     </div>

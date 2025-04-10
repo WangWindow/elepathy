@@ -43,6 +43,14 @@ messageInput.addEventListener('keypress', (e) => {
 // 页面加载时聚焦到输入框
 document.addEventListener('DOMContentLoaded', () => {
     messageInput.focus();
+
+    // 检查系统暗色模式设置
+    const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // 监听系统主题变化
+    prefersDarkScheme.addEventListener('change', (e) => {
+        console.log("系统主题变化:", e.matches ? "暗色模式" : "亮色模式");
+    });
 });
 
 // 初始化时隐藏浮动按钮，仅在移动设备上显示
@@ -143,8 +151,9 @@ if (clearConversationButton) {
         if (confirm('确定要清空这个对话的内容吗？此操作无法撤销。')) {
             // 清空前端显示
             chatMessages.innerHTML = `
-                <div class="message bot first-message">
-                    你好！我是Elepathy智能助手，很高兴为您服务。我可以回答问题、提供信息，或者聊聊天。请告诉我您需要什么帮助？
+                <div class="bot-message animate-fade-in">
+                    <div class="avatar">E</div>
+                    <div class="content">你好！我是Elepathy智能助手，很高兴为您服务。我可以回答问题、提供信息，或者聊聊天。请告诉我您需要什么帮助？</div>
                 </div>
             `;
 
@@ -378,14 +387,14 @@ function getCsrfToken() {
  */
 function addUserMessage(message) {
     const messageElement = document.createElement('div');
-    messageElement.className = 'message user';
+    messageElement.className = 'user-message animate-fade-in';
 
     // 处理消息文本，支持简单的URL识别和换行
     const messageText = formatMessageText(message);
 
     messageElement.innerHTML = `
         <div class="avatar">U</div>
-        ${messageText}
+        <div class="content">${messageText}</div>
     `;
 
     chatMessages.appendChild(messageElement);
@@ -399,14 +408,14 @@ function addUserMessage(message) {
  */
 function addBotMessage(message, isFirstMessage = false) {
     const messageElement = document.createElement('div');
-    messageElement.className = `message bot ${isFirstMessage ? 'first-message' : ''}`;
+    messageElement.className = `bot-message animate-fade-in ${isFirstMessage ? 'first-message' : ''}`;
 
     // 处理消息文本，支持简单的URL识别和换行
     const messageText = formatMessageText(message);
 
     messageElement.innerHTML = `
         <div class="avatar">E</div>
-        ${messageText}
+        <div class="content">${messageText}</div>
     `;
 
     chatMessages.appendChild(messageElement);
@@ -420,15 +429,17 @@ function addBotMessage(message, isFirstMessage = false) {
 function addTypingIndicator() {
     const id = 'typing-' + Date.now();
     const messageElement = document.createElement('div');
-    messageElement.className = 'message bot';
+    messageElement.className = 'bot-message';
     messageElement.id = id;
 
     messageElement.innerHTML = `
         <div class="avatar">E</div>
-        <div class="typing-indicator">
-            <span></span>
-            <span></span>
-            <span></span>
+        <div class="content">
+            <div class="typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     `;
 
@@ -463,7 +474,7 @@ function formatMessageText(text) {
     // 简单的URL识别
     formattedText = formattedText.replace(
         /(https?:\/\/[^\s]+)/g,
-        '<a href="$1" target="_blank">$1</a>'
+        '<a href="$1" target="_blank" class="text-primary underline">$1</a>'
     );
 
     // 处理换行

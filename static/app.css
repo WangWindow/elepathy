@@ -1,1 +1,384 @@
 @import "tailwindcss";
+
+/* 全局主题设置 */
+:root {
+    /* 亮色模式变量 */
+    --color-primary: #6b46c1;
+    --color-primary-light: #8662e3;
+    --color-primary-dark: #553c9a;
+    --color-secondary: #4f46e5;
+    --color-success: #22c55e;
+    --color-text: #333333;
+    --color-text-light: #666666;
+    --color-bg: #f8f9fa;
+    --color-bg-light: #ffffff;
+    --color-border: #e1e4e8;
+    --color-bot-bg: #eef2ff;
+    --color-user-bg: #6b46c1;
+    --color-user-text: #ffffff;
+    --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --dark-color: #1a1a2e;
+
+    /* 扩展颜色 */
+    --color-primary-100: #f3effb;
+    --color-primary-200: #e9e0f8;
+    --color-primary-300: #d4c2f2;
+    --color-primary-600: #6b46c1;
+    --color-primary-700: #553c9a;
+    --color-gray-bg: #edf2f7;
+    --color-menu-hover: #f3effb;
+    --color-menu-active: #6b46c1;
+    --color-menu-active-bg: #f3effb;
+    --color-red-50: #fef2f2;
+    --color-red-100: #fee2e2;
+}
+
+/* 暗色模式变量 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --color-primary: #8662e3;
+        --color-primary-light: #a080eb;
+        --color-primary-dark: #6b46c1;
+        --color-secondary: #6366f1;
+        --color-success: #34d379;
+        --color-text: #e2e8f0;
+        --color-text-light: #cbd5e1;
+        --color-bg: #111827;
+        --color-bg-light: #1e293b;
+        --color-border: #374151;
+        --color-bot-bg: #2d3748;
+        --color-user-bg: #8662e3;
+        --color-user-text: #ffffff;
+        --shadow-card: 0 4px 6px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 10px 15px rgba(0, 0, 0, 0.4);
+        --dark-color: #0f172a;
+
+        /* 扩展颜色 */
+        --color-primary-100: #2d3748;
+        --color-primary-200: #3a4a63;
+        --color-primary-300: #4b5f80;
+        --color-primary-600: #8662e3;
+        --color-primary-700: #9e7df5;
+        --color-gray-bg: #1a202c;
+        --color-menu-hover: #2d3748;
+        --color-menu-active: #a080eb;
+        --color-menu-active-bg: #2d3748;
+        --color-red-50: #441c24;
+        --color-red-100: #5c2433;
+    }
+}
+
+/* 为现有类添加变量替换 */
+.bg-primary {
+    background-color: var(--color-primary) !important;
+}
+
+.bg-secondary {
+    background-color: var(--color-secondary) !important;
+}
+
+.bg-success {
+    background-color: var(--color-success) !important;
+}
+
+.text-primary {
+    color: var(--color-primary) !important;
+}
+
+.text-text {
+    color: var(--color-text) !important;
+}
+
+.bg-light-gray {
+    background-color: var(--color-bg) !important;
+}
+
+.bg-white {
+    background-color: var(--color-bg-light) !important;
+}
+
+.shadow-card {
+    box-shadow: var(--shadow-card) !important;
+}
+
+.shadow-hover {
+    box-shadow: var(--shadow-hover) !important;
+}
+
+/* 扩展样式类 */
+.bg-primary-100 {
+    background-color: var(--color-primary-100) !important;
+}
+
+.bg-primary-200 {
+    background-color: var(--color-primary-200) !important;
+}
+
+.bg-primary-300 {
+    background-color: var(--color-primary-300) !important;
+}
+
+.bg-red-50 {
+    background-color: var(--color-red-50) !important;
+}
+
+.bg-red-100 {
+    background-color: var(--color-red-100) !important;
+}
+
+.border-primary-100 {
+    border-color: var(--color-primary-100) !important;
+}
+
+.border-gray-100 {
+    border-color: var(--color-border) !important;
+}
+
+.border-\[\#e1e4e8\] {
+    border-color: var(--color-border) !important;
+}
+
+.border-\[\#ced4da\] {
+    border-color: var(--color-border) !important;
+}
+
+.bg-\[\#f8f9fa\] {
+    background-color: var(--color-bg) !important;
+}
+
+.bg-\[\#eaecef\] {
+    background-color: var(--color-menu-hover) !important;
+}
+
+.hover\:bg-\[\#eaecef\]:hover {
+    background-color: var(--color-menu-hover) !important;
+}
+
+.from-primary-100 {
+    --tw-gradient-from: var(--color-primary-100) !important;
+}
+
+.from-primary-200 {
+    --tw-gradient-from: var(--color-primary-200) !important;
+}
+
+.to-primary-200 {
+    --tw-gradient-to: var(--color-primary-200) !important;
+}
+
+.to-primary-300 {
+    --tw-gradient-to: var(--color-primary-300) !important;
+}
+
+.from-primary-300\/10 {
+    --tw-gradient-from: color-mix(in srgb, var(--color-primary-300) 10%, transparent) !important;
+}
+
+.to-primary-200\/5 {
+    --tw-gradient-to: color-mix(in srgb, var(--color-primary-200) 5%, transparent) !important;
+}
+
+.from-primary-300\/30 {
+    --tw-gradient-from: color-mix(in srgb, var(--color-primary-300) 30%, transparent) !important;
+}
+
+.to-primary-200\/20 {
+    --tw-gradient-to: color-mix(in srgb, var(--color-primary-200) 20%, transparent) !important;
+}
+
+.hover\:bg-primary\/5:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 5%, transparent) !important;
+}
+
+.hover\:bg-primary\/10:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
+}
+
+.bg-primary\/5 {
+    background-color: color-mix(in srgb, var(--color-primary) 5%, transparent) !important;
+}
+
+.bg-primary\/10 {
+    background-color: color-mix(in srgb, var(--color-primary) 10%, transparent) !important;
+}
+
+.hover\:bg-primary-100:hover {
+    background-color: var(--color-primary-100) !important;
+}
+
+.hover\:bg-red-100:hover {
+    background-color: var(--color-red-100) !important;
+}
+
+.hover\:bg-red-200:hover {
+    background-color: var(--color-red-200, var(--color-red-100)) !important;
+}
+
+.hover\:bg-secondary:hover {
+    background-color: var(--color-secondary) !important;
+}
+
+.text-\[\#6c757d\] {
+    color: var(--color-text-light) !important;
+}
+
+.text-\[\#721c24\] {
+    color: var(--color-text) !important;
+}
+
+/* 聊天界面布局样式 */
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* 新对话布局 */
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+/* 机器人消息样式（左侧） */
+.bot-message {
+    align-self: flex-start;
+    display: flex;
+    max-width: 80%;
+    position: relative;
+}
+
+.bot-message .avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #5a67d8;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 0.625rem;
+}
+
+.bot-message .content {
+    background-color: var(--color-bot-bg);
+    color: var(--color-text);
+    padding: 0.75rem 1rem;
+    border-radius: 0.9375rem;
+    border-top-left-radius: 0.25rem;
+    max-width: calc(100% - 3rem);
+    word-break: break-word;
+}
+
+/* 用户消息样式（右侧） */
+.user-message {
+    align-self: flex-end;
+    display: flex;
+    flex-direction: row-reverse;
+    max-width: 80%;
+    position: relative;
+}
+
+.user-message .avatar {
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: var(--color-primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0.625rem;
+}
+
+.user-message .content {
+    background-color: var(--color-user-bg);
+    color: var(--color-user-text);
+    padding: 0.75rem 1rem;
+    border-radius: 0.9375rem;
+    border-top-right-radius: 0.25rem;
+    max-width: calc(100% - 3rem);
+    word-break: break-word;
+}
+
+/* 菜单样式调整 */
+.active-nav-link {
+    color: var(--color-menu-active) !important;
+    position: relative;
+}
+
+.active-nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--color-menu-active);
+}
+
+/* 移动端菜单 */
+.mobile-menu-active {
+    background-color: var(--color-menu-active-bg);
+    color: var(--color-menu-active);
+    border-radius: 0.25rem;
+}
+
+/* 暗色模式下特定的按钮和输入框调整 */
+@media (prefers-color-scheme: dark) {
+
+    input,
+    textarea,
+    select {
+        background-color: var(--color-bg);
+        border-color: var(--color-border);
+        color: var(--color-text);
+    }
+
+    button.bg-primary {
+        background-color: var(--color-primary) !important;
+    }
+
+    button.bg-primary:hover {
+        background-color: var(--color-primary-light) !important;
+    }
+
+    .hover\:bg-secondary:hover {
+        background-color: var(--color-secondary) !important;
+    }
+
+    /* 多层背景颜色 */
+    .bg-\[\#eef2ff\] {
+        background-color: var(--color-bot-bg) !important;
+    }
+
+    .text-primary-800 {
+        color: var(--color-primary-light) !important;
+    }
+
+    /* 修复暗色模式下菜单的问题 */
+    #mobile-menu {
+        background-color: var(--color-bg-light);
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
