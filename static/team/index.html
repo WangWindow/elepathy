@@ -5,126 +5,165 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="/static/home/css/style.css">
-    <link rel="stylesheet" href="/static/team/css/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 
-<body>
-    <header>
-        <div class="container">
-            <div class="logo">
-                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo">
-                <h1>Elepathy</h1>
+<body class="font-sans text-text leading-relaxed bg-light-gray">
+    <header class="bg-white shadow-md sticky top-0 z-10 py-4 transition-all duration-400">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo" class="h-[50px] mr-4 transition">
+                <h1 class="text-xl text-primary font-bold tracking-tighter">Elepathy</h1>
             </div>
             <nav>
-                <ul>
-                    <li><a href="/"><i class="fas fa-home"></i> 首页</a></li>
-                    <li><a href="/chat"><i class="fas fa-comments"></i> 智能对话</a></li>
-                    <li><a href="/tools/"><i class="fas fa-tools"></i> 工具箱</a></li>
-                    <li><a href="/team" class="active"><i class="fas fa-info-circle"></i> 关于我们</a></li>
+                <ul class="flex items-center">
+                    <li class="ml-8">
+                        <a href="/" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                            <i class="fas fa-home mr-2 text-[0.9em]"></i> 首页
+                        </a>
+                    </li>
+                    <li class="ml-8">
+                        <a href="/chat" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                            <i class="fas fa-comments mr-2 text-[0.9em]"></i> 智能对话
+                        </a>
+                    </li>
+                    <li class="ml-8">
+                        <a href="/tools/" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                            <i class="fas fa-tools mr-2 text-[0.9em]"></i> 工具箱
+                        </a>
+                    </li>
+                    <li class="ml-8">
+                        <a href="/team"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary after:content-[''] after:absolute after:w-full after:h-[3px] after:bg-primary after:bottom-0 after:left-0">
+                            <i class="fas fa-info-circle mr-2 text-[0.9em]"></i> 关于我们
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <section class="hero hero-team">
-        <div class="container">
-            <div class="hero-content">
-                <h2>我们的团队</h2>
-                <p>{{ description }}</p>
+    <section class="py-24 bg-gradient-to-r from-purple-200 to-purple-300 text-center">
+        <div class="container mx-auto w-[90%] max-w-[1200px] px-4">
+            <div class="mx-auto max-w-[800px]">
+                <h2 class="text-4xl font-bold mb-4 text-primary">我们的团队</h2>
+                <p class="text-lg">{{ description }}</p>
             </div>
         </div>
     </section>
 
-    <section id="team-intro" class="about">
-        <div class="container">
-            <h2>关于我们</h2>
-            <p>Elepathy 由一群热爱科技和充满创意的开发者组成。我们相信通过智能技术和人性化设计，可以创造出真正改善用户体验的产品。
-                团队成员来自不同背景，拥有多样的技能和经验，但我们有着共同的目标：打造优秀的工具，帮助用户更高效地工作和生活。</p>
+    <section id="team-intro" class="py-24 bg-light-gray">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4">
+            <h2 class="text-center text-4xl font-bold mb-10 text-primary">关于我们</h2>
+            <p class="text-center max-w-[800px] mx-auto text-lg leading-relaxed bg-white p-8 rounded shadow-sm">
+                Elepathy 由一群热爱科技和充满创意的开发者组成。我们相信通过智能技术和人性化设计，可以创造出真正改善用户体验的产品。
+                团队成员来自不同背景，拥有多样的技能和经验，但我们有着共同的目标：打造优秀的工具，帮助用户更高效地工作和生活。
+            </p>
         </div>
     </section>
 
-    <section id="team-values" class="features">
-        <div class="container">
-            <h2>我们的价值观</h2>
-            <div class="feature-grid">
-                <div class="feature-card">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>创新精神</h3>
-                    <p>不断探索新的解决方案，挑战现状</p>
+    <section id="team-values" class="py-24 bg-white">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4">
+            <h2 class="text-center text-4xl font-bold mb-16 text-primary">我们的价值观</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 max-w-[900px] mx-auto">
+                <div
+                    class="bg-white p-10 rounded shadow-sm text-center transition hover:-translate-y-4 hover:shadow-md relative overflow-hidden z-[1]">
+                    <i
+                        class="fas fa-lightbulb text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
+                    <h3 class="mb-5 text-2xl font-semibold text-text">创新精神</h3>
+                    <p class="text-text opacity-80 text-lg">不断探索新的解决方案，挑战现状</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-users"></i>
-                    <h3>团队协作</h3>
-                    <p>相信集体的智慧可以创造更大的价值</p>
+                <div
+                    class="bg-white p-10 rounded shadow-sm text-center transition hover:-translate-y-4 hover:shadow-md relative overflow-hidden z-[1]">
+                    <i class="fas fa-users text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
+                    <h3 class="mb-5 text-2xl font-semibold text-text">团队协作</h3>
+                    <p class="text-text opacity-80 text-lg">相信集体的智慧可以创造更大的价值</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-user-shield"></i>
-                    <h3>用户至上</h3>
-                    <p>以用户需求为中心，提供卓越的体验</p>
+                <div
+                    class="bg-white p-10 rounded shadow-sm text-center transition hover:-translate-y-4 hover:shadow-md relative overflow-hidden z-[1]">
+                    <i
+                        class="fas fa-user-shield text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
+                    <h3 class="mb-5 text-2xl font-semibold text-text">用户至上</h3>
+                    <p class="text-text opacity-80 text-lg">以用户需求为中心，提供卓越的体验</p>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-globe"></i>
-                    <h3>开放共享</h3>
-                    <p>拥抱开源精神，共同推动技术进步</p>
+                <div
+                    class="bg-white p-10 rounded shadow-sm text-center transition hover:-translate-y-4 hover:shadow-md relative overflow-hidden z-[1]">
+                    <i class="fas fa-globe text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
+                    <h3 class="mb-5 text-2xl font-semibold text-text">开放共享</h3>
+                    <p class="text-text opacity-80 text-lg">拥抱开源精神，共同推动技术进步</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="team-members" class="team">
-        <div class="container">
-            <h2>团队成员</h2>
-            <p>认识为 Elepathy 贡献才智的核心团队成员。</p>
-            <div class="team-members">
+    <section id="team-members" class="py-24 bg-white text-center">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-8 text-primary">团队成员</h2>
+            <p class="max-w-[700px] mx-auto mb-12 text-lg text-text opacity-90">认识为 Elepathy 贡献才智的核心团队成员。</p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                 {% for member in team_members %}
-                <div class="team-member">
-                    <img src="{{ member.avatar_path }}" alt="{{ member.name }}的头像">
-                    <h3>{{ member.name }}</h3>
-                    <p>{{ member.role }}</p>
-                    {% if member.bio %}
-                    <p class="member-bio">{{ member.bio }}</p>
-                    {% endif %}
-                    <div class="social-links">
+                <div
+                    class="bg-white rounded shadow-sm p-8 transition hover:-translate-y-3 hover:shadow-md h-full flex flex-col justify-between">
+                    <div>
+                        <img src="{{ member.avatar_path }}" alt="{{ member.name }}的头像"
+                            class="w-[120px] h-[120px] rounded-full object-cover mx-auto mb-5 border-4 border-light-gray transition hover:border-primary hover:scale-105">
+                        <h3 class="mb-2 text-xl text-primary">{{ member.name }}</h3>
+                        <p class="text-text mb-5 text-lg opacity-80">{{ member.role }}</p>
+                        {% if member.bio %}
+                        <p class="mb-5 text-text opacity-80">{{ member.bio }}</p>
+                        {% endif %}
+                    </div>
+                    <div class="flex justify-center gap-4 mt-auto pt-4">
                         {% if member.github_url %}
-                        <a href="{{ member.github_url }}" target="_blank" aria-label="GitHub链接"><i
-                                class="fab fa-github"></i></a>
+                        <a href="{{ member.github_url }}" target="_blank" aria-label="GitHub链接"
+                            class="w-10 h-10 rounded-full bg-light-gray text-primary text-xl flex items-center justify-center transition hover:bg-primary hover:text-white hover:-translate-y-1">
+                            <i class="fab fa-github"></i>
+                        </a>
                         {% endif %}
                         {% if member.email %}
-                        <a href="mailto:{{ member.email }}" aria-label="发送邮件"><i class="fas fa-envelope"></i></a>
+                        <a href="mailto:{{ member.email }}" aria-label="发送邮件"
+                            class="w-10 h-10 rounded-full bg-light-gray text-primary text-xl flex items-center justify-center transition hover:bg-primary hover:text-white hover:-translate-y-1">
+                            <i class="fas fa-envelope"></i>
+                        </a>
                         {% endif %}
                     </div>
                 </div>
                 {% empty %}
-                <div class="empty-state">
-                    <p>暂无团队成员信息</p>
+                <div class="col-span-full">
+                    <p class="text-center py-16">暂无团队成员信息</p>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </section>
 
-    <section id="join-us" class="about">
-        <div class="container">
-            <h2>加入我们</h2>
-            <p>我们始终在寻找对技术充满热情、富有创造力的人才加入我们的团队。
-                如果您对我们的项目感兴趣，或者有合作意向，欢迎随时与我们联系。</p>
-            <div style="text-align: center; margin-top: 30px;">
-                <a href="mailto:1598593280@qq.com" class="btn primary"><i class="fas fa-paper-plane"></i> 联系我们</a>
-                <a href="https://github.com/WangWindow" target="_blank" class="btn secondary"><i
-                        class="fab fa-github"></i> 访问 GitHub</a>
+    <section id="join-us" class="py-24 bg-light-gray">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4">
+            <h2 class="text-center text-4xl font-bold mb-10 text-primary">加入我们</h2>
+            <p class="text-center max-w-[800px] mx-auto text-lg leading-relaxed bg-white p-8 rounded shadow-sm">
+                我们始终在寻找对技术充满热情、富有创造力的人才加入我们的团队。
+                如果您对我们的项目感兴趣，或者有合作意向，欢迎随时与我们联系。
+            </p>
+            <div class="text-center mt-8">
+                <a href="mailto:1598593280@qq.com"
+                    class="inline-block px-7 py-3 bg-primary text-white rounded font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-md mr-4">
+                    <i class="fas fa-paper-plane mr-2"></i> 联系我们
+                </a>
+                <a href="https://github.com/WangWindow" target="_blank"
+                    class="inline-block px-7 py-3 bg-transparent text-primary border-2 border-primary rounded font-semibold transition hover:bg-opacity-5 hover:-translate-y-1 hover:shadow-md">
+                    <i class="fab fa-github mr-2"></i> 访问 GitHub
+                </a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Elepathy Teams. All rights reserved.</p>
+    <footer class="bg-dark-color text-white py-10 text-center">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4">
+            <p class="opacity-80 text-lg">&copy; 2025 Elepathy Teams. All rights reserved.</p>
         </div>
     </footer>
 
-    <script src="/static/home/js/main.js"></script>
+    <script src="/static/home/main.js"></script>
 </body>
 
 </html>
