@@ -1,13 +1,4 @@
 """
-==============================================================================
- * @FilePath: urls.py
- * @Author: WangWindow 1598593280@qq.com
- * @Date: 2025-03-24 17:53:13
- * @LastEditors: WangWindow 1598593280@qq.com
- * @LastEditTime: 2025-03-25 22:47:25
- * @Copyright © 2025 WangWindow
- * @Descripttion: URL configuration for mysite project.
-==============================================================================
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/5.1/topics/http/urls/
 Examples:
@@ -20,7 +11,6 @@ Class-based views
 Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-==============================================================================
 """
 
 from django.contrib import admin

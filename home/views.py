@@ -1,15 +1,3 @@
-"""
-==============================================================================
- * @FilePath: views.py
- * @Author: WangWindow 1598593280@qq.com
- * @Date: 2025-03-26 11:09:32
- * @LastEditors: WangWindow 1598593280@qq.com
- * @LastEditTime: 2025-03-26 11:12:02
- * @Copyright © 2025 WangWindow
- * @Descripttion: 首页视图
-==============================================================================
-"""
-
 from django.shortcuts import render
 
 

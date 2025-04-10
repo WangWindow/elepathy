@@ -1,15 +1,3 @@
-"""
-==============================================================================
- * @FilePath: main.py
- * @Author: WangWindow 1598593280@qq.com
- * @Date: 2025-03-24 17:13:57
- * @LastEditors: WangWindow 1598593280@qq.com
- * @LastEditTime: 2025-03-24 22:33:34
- * @Copyright © 2025 WangWindow
- * @Descripttion: Entry Point
-==============================================================================
-"""
-
 import os
 import subprocess
 import sys

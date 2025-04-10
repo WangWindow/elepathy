@@ -1,15 +1,3 @@
-"""
-==============================================================================
- * @FilePath: views.py
- * @Author: WangWindow 1598593280@qq.com
- * @Date: 2025-03-26 11:09:32
- * @LastEditors: WangWindow 1598593280@qq.com
- * @LastEditTime: 2025-03-28 13:23:28
- * @Copyright © 2025 WangWindow
- * @Descripttion:
-==============================================================================
-"""
-
 from django.shortcuts import render
 from team.models import TeamMember
 

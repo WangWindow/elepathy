@@ -1,15 +1,3 @@
-"""
-==============================================================================
- * @FilePath: tests.py
- * @Author: WangWindow 1598593280@qq.com
- * @Date: 2025-03-25 23:28:50
- * @LastEditors: WangWindow 1598593280@qq.com
- * @LastEditTime: 2025-03-28 11:49:21
- * @Copyright © 2025 WangWindow
- * @Descripttion:
-==============================================================================
-"""
-
 from django.test import TestCase, Client
 from django.urls import reverse
 
