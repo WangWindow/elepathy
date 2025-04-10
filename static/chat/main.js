@@ -390,7 +390,7 @@ function addUserMessage(message) {
     messageElement.className = 'user-message animate-fade-in';
 
     // 处理消息文本，支持简单的URL识别和换行
-    const messageText = formatMessageText(message);
+    const messageText = formatMessageText(message, 'user');
 
     messageElement.innerHTML = `
         <div class="avatar">U</div>
@@ -410,7 +410,7 @@ function addBotMessage(message, isFirstMessage = false) {
     const messageElement = document.createElement('div');
     messageElement.className = `bot-message animate-fade-in ${isFirstMessage ? 'first-message' : ''}`;
 
-    // 处理消息文本，支持简单的URL识别和换行
+    // 处理消息文本，支持Markdown解析
     const messageText = formatMessageText(message);
 
     messageElement.innerHTML = `
@@ -460,27 +460,56 @@ function removeTypingIndicator(id) {
 }
 
 /**
- * 格式化消息文本，支持URL识别和换行
+ * 格式化消息文本，支持Markdown、URL识别和换行
  * @param {string} text - 原始消息文本
  * @returns {string} 格式化后的HTML
  */
 function formatMessageText(text) {
-    // 转义HTML字符
-    let formattedText = text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+    // 对于用户输入的消息仅做简单格式化
+    if (arguments.length > 1 && arguments[1] === 'user') {
+        // 转义HTML字符
+        let formattedText = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
 
-    // 简单的URL识别
-    formattedText = formattedText.replace(
-        /(https?:\/\/[^\s]+)/g,
-        '<a href="$1" target="_blank" class="text-primary underline">$1</a>'
-    );
+        // 简单的URL识别
+        formattedText = formattedText.replace(
+            /(https?:\/\/[^\s]+)/g,
+            '<a href="$1" target="_blank" class="text-primary underline">$1</a>'
+        );
 
-    // 处理换行
-    formattedText = formattedText.replace(/\n/g, '<br>');
+        // 处理换行
+        formattedText = formattedText.replace(/\n/g, '<br>');
 
-    return formattedText;
+        return formattedText;
+    }
+
+    // 对于机器人的消息使用Markdown解析
+    try {
+        // 使用marked解析Markdown
+        const parsedContent = marked.parse(text);
+
+        // 为代码块添加样式
+        return parsedContent;
+    } catch (error) {
+        console.error('Markdown解析错误:', error);
+
+        // 发生错误时回退到原来的简单格式化
+        let formattedText = text
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+
+        formattedText = formattedText.replace(
+            /(https?:\/\/[^\s]+)/g,
+            '<a href="$1" target="_blank" class="text-primary underline">$1</a>'
+        );
+
+        formattedText = formattedText.replace(/\n/g, '<br>');
+
+        return formattedText;
+    }
 }
 
 /**

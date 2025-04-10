@@ -419,9 +419,6 @@
   .h-\[8px\] {
     height: 8px;
   }
-  .h-\[40px\] {
-    height: 40px;
-  }
   .h-\[50px\] {
     height: 50px;
   }
@@ -769,9 +766,6 @@
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
   }
-  .py-10 {
-    padding-block: calc(var(--spacing) * 10);
-  }
   .py-12 {
     padding-block: calc(var(--spacing) * 12);
   }
@@ -932,10 +926,6 @@
   .shadow-sm {
     --tw-shadow: 0 1px 3px 0 var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 1px 2px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
-  }
-  .brightness-150 {
-    --tw-brightness: brightness(150%);
-    filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
   }
   .drop-shadow-xl {
     --tw-drop-shadow-size: drop-shadow(0 9px 7px var(--tw-drop-shadow-color, rgb(0 0 0 / 0.1)));
@@ -1181,13 +1171,6 @@
       }
     }
   }
-  .hover\:opacity-90 {
-    &:hover {
-      @media (hover: hover) {
-        opacity: 90%;
-      }
-    }
-  }
   .hover\:opacity-100 {
     &:hover {
       @media (hover: hover) {
@@ -1295,11 +1278,6 @@
   .md\:mr-0 {
     @media (width >= 48rem) {
       margin-right: calc(var(--spacing) * 0);
-    }
-  }
-  .md\:mb-0 {
-    @media (width >= 48rem) {
-      margin-bottom: calc(var(--spacing) * 0);
     }
   }
   .md\:mb-3 {
@@ -1732,6 +1710,136 @@
 }
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
+}
+.content {
+  line-height: 1.6;
+}
+.content h1 {
+  font-size: 1.8rem;
+  margin: 1.5rem 0 1rem;
+  font-weight: 600;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3rem;
+}
+.content h2 {
+  font-size: 1.5rem;
+  margin: 1.3rem 0 0.8rem;
+  font-weight: 600;
+  border-bottom: 1px solid #eaecef;
+  padding-bottom: 0.3rem;
+}
+.content h3 {
+  font-size: 1.3rem;
+  margin: 1.2rem 0 0.6rem;
+  font-weight: 600;
+}
+.content h4 {
+  font-size: 1.15rem;
+  margin: 1rem 0 0.6rem;
+  font-weight: 600;
+}
+.content h5, .content h6 {
+  font-size: 1rem;
+  margin: 1rem 0 0.5rem;
+  font-weight: 600;
+}
+.content p {
+  margin-bottom: 1rem;
+}
+.content strong {
+  font-weight: 600;
+}
+.content em {
+  font-style: italic;
+}
+.content blockquote {
+  border-left: 4px solid #6b46c1;
+  padding-left: 1rem;
+  margin-left: 0;
+  color: #555;
+  background-color: rgba(107, 70, 193, 0.05);
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+.content ul, .content ol {
+  padding-left: 2rem;
+  margin: 0.5rem 0 1rem;
+}
+.content ul {
+  list-style-type: disc;
+}
+.content ol {
+  list-style-type: decimal;
+}
+.content li {
+  margin-bottom: 0.25rem;
+}
+.content a {
+  color: #6b46c1;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+.content a:hover {
+  text-decoration-thickness: 2px;
+}
+.content pre {
+  background-color: #f6f8fa;
+  border-radius: 6px;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1rem 0;
+  position: relative;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.content pre code {
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+}
+.content code {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background-color: rgba(175, 184, 193, 0.2);
+  padding: 0.2em 0.4em;
+  border-radius: 3px;
+  font-size: 0.9em;
+  white-space: break-spaces;
+}
+.content table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1rem 0;
+  overflow-x: auto;
+  display: block;
+}
+.content th, .content td {
+  padding: 0.6rem 1rem;
+  border: 1px solid #e1e4e8;
+  text-align: left;
+}
+.content th {
+  background-color: #f6f8fa;
+  font-weight: 600;
+}
+.content tr:nth-child(2n) {
+  background-color: #f8f9fa;
+}
+.content hr {
+  height: 0.25rem;
+  padding: 0;
+  margin: 1.5rem 0;
+  background-color: #e1e4e8;
+  border: 0;
+  overflow: hidden;
+}
+.content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 1rem 0;
 }
 @property --tw-rotate-x {
   syntax: "*";
