@@ -6,36 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
-<body class="font-sans leading-relaxed text-text bg-light-gray">
+<body class="font-sans leading-relaxed text-text bg-light-gray antialiased overflow-x-hidden">
     <header class="bg-white shadow-md sticky top-0 z-10 py-4 transition-all duration-400">
         <div class="w-[90%] max-w-[1200px] mx-auto px-4 flex justify-between items-center">
             <div class="logo flex items-center">
-                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo" class="h-[50px] mr-4 transition">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo"
+                    class="h-[50px] mr-4 transition hover:scale-105">
                 <h1 class="text-xl text-primary font-bold tracking-tighter">Elepathy</h1>
             </div>
-            <nav>
+            <nav class="hidden md:block">
                 <ul class="flex items-center">
                     <li class="ml-8">
                         <a href="/"
-                            class="active text-text font-medium relative py-2 text-[1.05rem] hover:text-primary after:content-[''] after:absolute after:w-full after:h-[3px] after:bg-primary after:bottom-0 after:left-0">
+                            class="active text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition after:content-[''] after:absolute after:w-full after:h-[3px] after:bg-primary after:bottom-0 after:left-0">
                             <i class="fas fa-home mr-2 text-[0.9em]"></i> 首页
                         </a>
                     </li>
                     <li class="ml-8">
-                        <a href="/chat" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                        <a href="/chat"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
                             <i class="fas fa-comments mr-2 text-[0.9em]"></i> 智能对话
                         </a>
                     </li>
                     <li class="ml-8">
-                        <a href="/tools/" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                        <a href="/tools"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
                             <i class="fas fa-tools mr-2 text-[0.9em]"></i> 工具箱
                         </a>
                     </li>
                     <li class="ml-8">
-                        <a href="/team" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                        <a href="/team"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
                             <i class="fas fa-info-circle mr-2 text-[0.9em]"></i> 关于我们
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-text text-2xl" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="hidden md:hidden bg-white w-full absolute left-0 shadow-lg" id="mobile-menu">
+            <nav class="w-[90%] mx-auto py-4">
+                <ul class="flex flex-col space-y-3">
+                    <li>
+                        <a href="/" class="block px-4 py-2 bg-primary-100 text-primary rounded">
+                            <i class="fas fa-home mr-2"></i> 首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/chat"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-comments mr-2"></i> 智能对话
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/tools"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-tools mr-2"></i> 工具箱
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/team"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-info-circle mr-2"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -43,70 +82,72 @@
         </div>
     </header>
 
-    <section class="hero py-32 bg-gradient-to-br from-[#f5f7fa] to-[#e4e8f0] relative overflow-hidden">
+    <section class="hero py-32 bg-gradient-to-br from-primary-100 to-primary-200 relative overflow-hidden">
         <div
-            class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-primary/10 to-primary/5 z-0">
+            class="absolute top-[-10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-primary-300/30 to-primary-200/20 z-0 animate-pulse-slow">
         </div>
         <div class="container relative z-1 flex items-center justify-between w-[90%] max-w-[1200px] mx-auto px-4">
             <div class="hero-content flex-1 pr-12 md:pr-0 md:mb-16 md:text-center">
-                <h2 class="text-5xl md:text-4xl sm:text-3xl mb-6 text-primary leading-tight font-bold tracking-tight">
+                <h2
+                    class="text-5xl md:text-4xl sm:text-3xl mb-6 text-primary-800 leading-tight font-bold tracking-tight animate-fadeIn">
                     智慧共情的力量</h2>
-                <p class="text-xl mb-9 text-text opacity-90 max-w-[500px] md:mx-auto">{{ description }}</p>
-                <div class="cta-buttons mt-10 md:flex md:flex-col md:items-center">
-                    <a href="/tools/"
-                        class="btn primary inline-block px-7 py-3 rounded font-semibold text-center transition bg-primary text-white shadow-[0_4px_6px_rgba(107,70,193,0.2)] hover:bg-secondary hover:-translate-y-1 hover:shadow-[0_7px_14px_rgba(107,70,193,0.3)] mr-4 md:mr-0 md:mb-3">
+                <p class="text-xl mb-9 text-text opacity-90 max-w-[500px] md:mx-auto animate-fadeIn"
+                    style="animation-delay: 300ms">{{ description }}</p>
+                <div class="cta-buttons mt-10 md:flex md:flex-col md:items-center animate-fadeIn"
+                    style="animation-delay: 600ms">
+                    <a href="/tools"
+                        class="btn primary inline-block px-7 py-3 rounded font-semibold text-center transition bg-primary text-white shadow-md hover:bg-secondary hover:-translate-y-1 hover:shadow-hover mr-4 md:mr-0 md:mb-3">
                         <i class="fas fa-tools mr-2"></i> 探索工具
                     </a>
                     <a href="#about"
-                        class="btn secondary inline-block px-7 py-3 rounded font-semibold text-center transition bg-transparent text-primary border-2 border-primary hover:bg-primary/5 hover:-translate-y-1 hover:shadow-[0_7px_14px_rgba(107,70,193,0.1)]">
+                        class="btn secondary inline-block px-7 py-3 rounded font-semibold text-center transition bg-transparent text-primary border-2 border-primary hover:bg-primary-100 hover:-translate-y-1 hover:shadow-hover">
                         <i class="fas fa-book mr-2"></i> 了解更多
                     </a>
                 </div>
             </div>
             <div class="hero-image flex-1 text-center relative md:hidden">
                 <img src="/static/images/logo/hero-elephant.webp" alt="Elepathy 大象形象"
-                    class="max-h-[380px] animate-[float_6s_ease-in-out_infinite] filter drop-shadow-xl">
-                <style>
-                    @keyframes float {
-
-                        0%,
-                        100% {
-                            transform: translateY(0);
-                        }
-
-                        50% {
-                            transform: translateY(-20px);
-                        }
-                    }
-                </style>
+                    class="max-h-[380px] animate-float filter drop-shadow-xl">
             </div>
         </div>
     </section>
 
     <section id="features" class="features py-32 bg-white relative">
         <div class="container w-[90%] max-w-[1200px] mx-auto px-4">
-            <h2 class="text-center mb-18 text-primary text-4xl font-bold">为什么选择 Elepathy?</h2>
+            <h2 class="text-center mb-18 text-primary text-4xl font-bold animate-fadeIn">为什么选择 Elepathy?</h2>
             <div class="feature-grid grid grid-cols-2 md:grid-cols-1 gap-10 max-w-[900px] mx-auto">
-                <div
-                    class="feature-card top-left bg-gradient-to-br from-primary/8 to-white via-white bg-[length:15%_100%] p-10 rounded-tl-[30px] rounded-tr rounded-bl rounded-br text-center transition hover:-translate-y-4 hover:shadow-md relative z-[1] overflow-hidden">
+                <div class="feature-card top-left bg-white p-10 rounded-tl-[30px] rounded-tr rounded-bl rounded-br text-center transition hover:-translate-y-4 hover:shadow-hover relative z-[1] overflow-hidden border border-primary-100 group animate-fadeIn"
+                    style="animation-delay: 100ms">
+                    <div
+                        class="absolute top-0 left-0 h-full w-2 bg-primary transform transition-all duration-500 group-hover:w-full group-hover:opacity-10">
+                    </div>
                     <i class="fas fa-brain text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
                     <h3 class="mb-5 text-2xl text-text font-semibold">强大记忆力</h3>
                     <p class="text-text opacity-80 text-lg">如同大象般的记忆力，帮助您管理和分析大量数据</p>
                 </div>
-                <div
-                    class="feature-card top-right bg-gradient-to-bl from-primary/8 to-white via-white bg-[length:15%_100%] p-10 rounded-tr-[30px] rounded-tl rounded-bl rounded-br text-center transition hover:-translate-y-4 hover:shadow-md relative z-[1] overflow-hidden">
+                <div class="feature-card top-right bg-white p-10 rounded-tr-[30px] rounded-tl rounded-bl rounded-br text-center transition hover:-translate-y-4 hover:shadow-hover relative z-[1] overflow-hidden border border-primary-100 group animate-fadeIn"
+                    style="animation-delay: 200ms">
+                    <div
+                        class="absolute top-0 right-0 h-full w-2 bg-primary transform transition-all duration-500 group-hover:w-full group-hover:opacity-10">
+                    </div>
                     <i class="fas fa-heart text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
                     <h3 class="mb-5 text-2xl text-text font-semibold">情感共鸣</h3>
                     <p class="text-text opacity-80 text-lg">理解用户需求，提供贴心的体验与服务</p>
                 </div>
-                <div
-                    class="feature-card bottom-left bg-gradient-to-tr from-primary/8 to-white via-white bg-[length:15%_100%] p-10 rounded-bl-[30px] rounded-tr rounded-tl rounded-br text-center transition hover:-translate-y-4 hover:shadow-md relative z-[1] overflow-hidden">
+                <div class="feature-card bottom-left bg-white p-10 rounded-bl-[30px] rounded-tr rounded-tl rounded-br text-center transition hover:-translate-y-4 hover:shadow-hover relative z-[1] overflow-hidden border border-primary-100 group animate-fadeIn"
+                    style="animation-delay: 300ms">
+                    <div
+                        class="absolute bottom-0 left-0 h-full w-2 bg-primary transform transition-all duration-500 group-hover:w-full group-hover:opacity-10">
+                    </div>
                     <i class="fas fa-tools text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
                     <h3 class="mb-5 text-2xl text-text font-semibold">实用工具集</h3>
                     <p class="text-text opacity-80 text-lg">提供丰富的工具帮助您高效工作</p>
                 </div>
-                <div
-                    class="feature-card bottom-right bg-gradient-to-tl from-primary/8 to-white via-white bg-[length:15%_100%] p-10 rounded-br-[30px] rounded-tr rounded-bl rounded-tl text-center transition hover:-translate-y-4 hover:shadow-md relative z-[1] overflow-hidden">
+                <div class="feature-card bottom-right bg-white p-10 rounded-br-[30px] rounded-tr rounded-bl rounded-tl text-center transition hover:-translate-y-4 hover:shadow-hover relative z-[1] overflow-hidden border border-primary-100 group animate-fadeIn"
+                    style="animation-delay: 400ms">
+                    <div
+                        class="absolute bottom-0 right-0 h-full w-2 bg-primary transform transition-all duration-500 group-hover:w-full group-hover:opacity-10">
+                    </div>
                     <i
                         class="fas fa-shield-alt text-5xl text-primary mb-6 transition hover:scale-110 hover:text-accent"></i>
                     <h3 class="mb-5 text-2xl text-text font-semibold">安全可靠</h3>
@@ -118,25 +159,109 @@
 
     <section id="about" class="about py-32 bg-light-gray relative overflow-hidden">
         <div
-            class="absolute bottom-[-300px] left-[-300px] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-primary/5 to-primary/2 z-0">
+            class="absolute bottom-[-300px] left-[-300px] w-[600px] h-[600px] rounded-full bg-gradient-to-r from-primary-300/10 to-primary-200/5 z-0 animate-pulse-slow">
         </div>
         <div class="container relative z-1 w-[90%] max-w-[1200px] mx-auto px-4">
             <h2 class="text-center mb-10 text-primary text-4xl font-bold">关于 Elepathy</h2>
-            <p class="text-center max-w-[800px] mx-auto text-lg leading-relaxed bg-white p-8 rounded shadow-sm">
-                Elepathy 源于"elephant"（大象）和"empathy"（共情）的结合，象征着强大的记忆力和深刻的情感理解力。
-                就像大象以其惊人的记忆力和高度的情感智能而闻名，我们的平台致力于提供智能、人性化、可靠的工具和服务，
-                帮助用户更好地组织信息、连接思想并提升效率。
-            </p>
+            <div
+                class="bg-white p-8 rounded shadow-card max-w-[800px] mx-auto transform transition hover:-translate-y-2 hover:shadow-hover">
+                <p class="text-center text-lg leading-relaxed">
+                    Elepathy 源于"elephant"（大象）和"empathy"（共情）的结合，象征着强大的记忆力和深刻的情感理解力。
+                    就像大象以其惊人的记忆力和高度的情感智能而闻名，我们的平台致力于提供智能、人性化、可靠的工具和服务，
+                    帮助用户更好地组织信息、连接思想并提升效率。
+                </p>
+            </div>
         </div>
     </section>
 
-    <footer class="bg-dark-color text-white py-10 text-center">
+    <section id="call-to-action" class="py-24 bg-gradient-to-r from-primary-600 to-primary-700 text-white text-center">
+        <div class="container mx-auto w-[90%] max-w-[800px] px-4">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6 animate-fadeIn">准备好开始了吗？</h2>
+            <p class="text-lg mb-10 opacity-90 animate-fadeIn" style="animation-delay: 200ms">
+                加入 Elepathy，体验智慧共情的力量，提升您的工作效率和生活质量。
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 animate-fadeIn" style="animation-delay: 400ms">
+                <a href="/chat"
+                    class="px-7 py-3 bg-white text-primary rounded font-semibold transition hover:bg-primary-100 hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fas fa-comments mr-2"></i> 开始对话
+                </a>
+                <a href="/tools"
+                    class="px-7 py-3 bg-transparent text-white border-2 border-white rounded font-semibold transition hover:bg-white/10 hover:-translate-y-1 hover:shadow-lg">
+                    <i class="fas fa-tools mr-2"></i> 探索工具
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark-color text-white py-12 text-center">
         <div class="container w-[90%] max-w-[1200px] mx-auto px-4">
-            <p class="opacity-80 text-lg">&copy; 2025 Elepathy Teams. All rights reserved.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-between mb-10">
+                <div class="mb-6 md:mb-0 flex items-center">
+                    <a href="/" class="flex items-center hover:opacity-90 transition">
+                        <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo"
+                            class="h-[40px] mr-4 filter brightness-150">
+                        <h2 class="text-xl font-bold tracking-tighter">Elepathy</h2>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <a href="/" class="text-white hover:text-primary-300 transition duration-300">首页</a>
+                    <a href="/chat" class="text-white hover:text-primary-300 transition duration-300">智能对话</a>
+                    <a href="/tools" class="text-white hover:text-primary-300 transition duration-300">工具箱</a>
+                    <a href="/team" class="text-white hover:text-primary-300 transition duration-300">关于我们</a>
+                </div>
+                <div class="flex space-x-4 mt-6 md:mt-0">
+                    <a href="https://github.com/WangWindow" target="_blank"
+                        class="w-10 h-10 rounded-full bg-dark-color border border-gray-700 text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:1598593280@qq.com"
+                        class="w-10 h-10 rounded-full bg-dark-color border border-gray-700 text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="opacity-70 text-sm">&copy; 2025 Elepathy Teams. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
     <script src="/static/home/main.js"></script>
+    <!-- 移动端菜单脚本 -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 滚动动画
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.animate-fadeIn');
+
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight;
+
+                if (elementPosition < screenPosition - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // 初始状态
+        document.querySelectorAll('.animate-fadeIn').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.5s ease-out';
+        });
+
+        // 监听滚动事件
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
 </body>
 
 </html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body class="font-sans text-text leading-relaxed bg-light-gray antialiased">
+    <header class="bg-white shadow-md sticky top-0 z-10 py-4 transition-all duration-400">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo"
+                    class="h-[50px] mr-4 transition hover:scale-105">
+                <h1 class="text-xl text-primary font-bold tracking-tighter">Elepathy</h1>
+            </div>
+            <nav class="hidden md:block">
+                <ul class="flex items-center">
+                    <li class="ml-8">
+                        <a href="/"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
+                            <i class="fas fa-home mr-2 text-[0.9em]"></i> 首页
+                        </a>
+                    </li>
+                    <li class="ml-8">
+                        <a href="/chat"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
+                            <i class="fas fa-comments mr-2 text-[0.9em]"></i> 智能对话
+                        </a>
+                    </li>
+                    <li class="ml-8">
+                        <a href="/tools"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition after:content-[''] after:absolute after:w-full after:h-[3px] after:bg-primary after:bottom-0 after:left-0">
+                            <i class="fas fa-tools mr-2 text-[0.9em]"></i> 工具箱
+                        </a>
+                    </li>
+                    <li class="ml-8">
+                        <a href="/team"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
+                            <i class="fas fa-info-circle mr-2 text-[0.9em]"></i> 关于我们
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-text text-2xl" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="hidden md:hidden bg-white w-full absolute left-0 shadow-lg" id="mobile-menu">
+            <nav class="w-[90%] mx-auto py-4">
+                <ul class="flex flex-col space-y-3">
+                    <li>
+                        <a href="/"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-home mr-2"></i> 首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/chat"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-comments mr-2"></i> 智能对话
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/tools" class="block px-4 py-2 bg-primary-100 text-primary rounded">
+                            <i class="fas fa-tools mr-2"></i> 工具箱
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/team"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-info-circle mr-2"></i> 关于我们
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="py-24 bg-gradient-to-r from-primary-200 to-primary-300 text-center">
+        <div class="container mx-auto w-[90%] max-w-[1200px] px-4">
+            <div class="mx-auto max-w-[800px]">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-primary-800 animate-fadeIn">实用工具箱</h2>
+                <p class="text-lg md:text-xl">{{ description }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="tools-intro" class="py-24 bg-white">
+        <div class="w-[90%] max-w-[1200px] mx-auto px-4">
+            <h2 class="text-center text-4xl font-bold mb-10 text-primary">可用工具</h2>
+
+            {% if tools %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
+                {% for tool in tools %}
+                <div class="bg-white rounded shadow-card overflow-hidden transition duration-500 hover:-translate-y-3 hover:shadow-hover border border-transparent hover:border-primary-200 flex flex-col h-full animate-fadeIn"
+                    data-delay="{{ forloop.counter|add:-1 }}">
+                    <div class="h-[8px] bg-primary"></div>
+                    <div class="p-8 flex-grow">
+                        <div
+                            class="w-14 h-14 rounded-lg bg-primary-100 flex items-center justify-center mb-5 text-primary text-2xl transform transition-transform group-hover:rotate-12">
+                            <i class="{{ tool.icon|default:'fas fa-tools' }}"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold text-primary mb-3">{{ tool.name }}</h3>
+                        <p class="text-text opacity-80 mb-4">{{ tool.description }}</p>
+                        <div class="mb-4 flex flex-wrap gap-2">
+                            {% for tag in tool.tags %}
+                            <span class="bg-primary-100 text-primary text-xs px-3 py-1 rounded-full">{{ tag }}</span>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <div class="mt-auto px-8 pb-6">
+                        <a href="{{ tool.url }}"
+                            class="inline-block w-full text-center py-3 bg-primary text-white rounded-lg font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-md">
+                            {% if tool.status == 'beta' %}
+                            <span class="bg-accent px-2 py-0.5 rounded-full text-xs mr-2">Beta</span>
+                            {% endif %}
+                            立即使用
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="text-center py-16 bg-light-gray rounded shadow-sm">
+                <div class="text-6xl text-primary opacity-40 mb-8">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3 class="text-2xl mb-3">工具正在开发中</h3>
+                <p class="text-gray-600 max-w-md mx-auto">
+                    我们正在努力开发更多实用工具，敬请期待！
+                </p>
+            </div>
+            {% endif %}
+        </div>
+    </section>
+
+    <section id="request-tool" class="py-24 bg-light-gray">
+        <div class="w-[90%] max-w-[900px] mx-auto px-4">
+            <h2 class="text-center text-4xl font-bold mb-10 text-primary">需要什么工具？</h2>
+            <p class="text-center max-w-[700px] mx-auto mb-12 text-lg opacity-80">
+                如果您有工具需求或建议，请告诉我们，我们将尽力开发满足您需求的工具。
+            </p>
+
+            <form id="tool-request-form" class="bg-white p-8 rounded shadow-card">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="col-span-1">
+                        <label for="name" class="block mb-2 text-text">您的姓名</label>
+                        <input type="text" id="name" name="name" placeholder="请输入您的姓名"
+                            class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary focus:ring focus:ring-primary-200 focus:ring-opacity-50 transition">
+                    </div>
+                    <div class="col-span-1">
+                        <label for="email" class="block mb-2 text-text">您的邮箱</label>
+                        <input type="email" id="email" name="email" placeholder="请输入您的邮箱地址"
+                            class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary focus:ring focus:ring-primary-200 focus:ring-opacity-50 transition">
+                    </div>
+                    <div class="col-span-full">
+                        <label for="tool-name" class="block mb-2 text-text">工具名称</label>
+                        <input type="text" id="tool-name" name="tool_name" placeholder="您所需工具的名称或类型"
+                            class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary focus:ring focus:ring-primary-200 focus:ring-opacity-50 transition">
+                    </div>
+                    <div class="col-span-full">
+                        <label for="description" class="block mb-2 text-text">详细描述</label>
+                        <textarea id="description" name="description" rows="5" placeholder="请详细描述您所需的工具功能和用途"
+                            class="w-full px-4 py-3 border border-gray-300 rounded focus:border-primary focus:ring focus:ring-primary-200 focus:ring-opacity-50 transition"></textarea>
+                    </div>
+                </div>
+                <div class="mt-6 text-right">
+                    <button type="submit"
+                        class="px-7 py-3 bg-primary text-white rounded font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-hover">
+                        <i class="fas fa-paper-plane mr-2"></i> 提交建议
+                    </button>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-dark-color text-white py-12 text-center">
+        <div class="container w-[90%] max-w-[1200px] mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-between mb-10">
+                <div class="mb-6 md:mb-0 flex items-center">
+                    <a href="/" class="flex items-center hover:opacity-90 transition">
+                        <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo"
+                            class="h-[40px] mr-4 filter brightness-150">
+                        <h2 class="text-xl font-bold tracking-tighter">Elepathy</h2>
+                    </a>
+                </div>
+                <div class="flex flex-wrap justify-center gap-8">
+                    <a href="/" class="text-white hover:text-primary-300 transition duration-300">首页</a>
+                    <a href="/chat" class="text-white hover:text-primary-300 transition duration-300">智能对话</a>
+                    <a href="/tools" class="text-white hover:text-primary-300 transition duration-300">工具箱</a>
+                    <a href="/team" class="text-white hover:text-primary-300 transition duration-300">关于我们</a>
+                </div>
+                <div class="flex space-x-4 mt-6 md:mt-0">
+                    <a href="https://github.com/WangWindow" target="_blank"
+                        class="w-10 h-10 rounded-full bg-dark-color border border-gray-700 text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:1598593280@qq.com"
+                        class="w-10 h-10 rounded-full bg-dark-color border border-gray-700 text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="opacity-70 text-sm">&copy; 2025 Elepathy Teams. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/home/main.js"></script>
+    <!-- 移动端菜单脚本 -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // 表单处理
+        document.getElementById('tool-request-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            // 这里可以添加表单提交处理逻辑，例如AJAX请求
+            alert('感谢您的建议！我们已收到您的请求，将尽快考虑开发。');
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

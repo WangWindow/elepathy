@@ -6,36 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/static/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
-<body class="font-sans text-text leading-relaxed bg-light-gray">
+<body class="font-sans text-text leading-relaxed bg-light-gray antialiased">
     <header class="bg-white shadow-md sticky top-0 z-10 py-4 transition-all duration-400">
         <div class="w-[90%] max-w-[1200px] mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center">
-                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo" class="h-[50px] mr-4 transition">
+                <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo"
+                    class="h-[50px] mr-4 transition hover:scale-105">
                 <h1 class="text-xl text-primary font-bold tracking-tighter">Elepathy</h1>
             </div>
-            <nav>
+            <nav class="hidden md:block">
                 <ul class="flex items-center">
                     <li class="ml-8">
-                        <a href="/" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                        <a href="/"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
                             <i class="fas fa-home mr-2 text-[0.9em]"></i> 首页
                         </a>
                     </li>
                     <li class="ml-8">
                         <a href="/chat"
-                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary after:content-[''] after:absolute after:w-full after:h-[3px] after:bg-primary after:bottom-0 after:left-0">
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition after:content-[''] after:absolute after:w-full after:h-[3px] after:bg-primary after:bottom-0 after:left-0">
                             <i class="fas fa-comments mr-2 text-[0.9em]"></i> 智能对话
                         </a>
                     </li>
                     <li class="ml-8">
-                        <a href="/tools/" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                        <a href="/tools"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
                             <i class="fas fa-tools mr-2 text-[0.9em]"></i> 工具箱
                         </a>
                     </li>
                     <li class="ml-8">
-                        <a href="/team" class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary">
+                        <a href="/team"
+                            class="text-text font-medium relative py-2 text-[1.05rem] hover:text-primary transition">
                             <i class="fas fa-info-circle mr-2 text-[0.9em]"></i> 关于我们
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- 移动端菜单按钮 -->
+            <button class="md:hidden text-text text-2xl" id="mobile-menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        <!-- 移动端菜单 -->
+        <div class="hidden md:hidden bg-white w-full absolute left-0 shadow-lg" id="mobile-menu">
+            <nav class="w-[90%] mx-auto py-4">
+                <ul class="flex flex-col space-y-3">
+                    <li>
+                        <a href="/"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-home mr-2"></i> 首页
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/chat" class="block px-4 py-2 bg-primary-100 text-primary rounded">
+                            <i class="fas fa-comments mr-2"></i> 智能对话
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/tools"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-tools mr-2"></i> 工具箱
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/team"
+                            class="block px-4 py-2 text-text hover:bg-primary-100 hover:text-primary rounded transition">
+                            <i class="fas fa-info-circle mr-2"></i> 关于我们
                         </a>
                     </li>
                 </ul>
@@ -43,14 +82,14 @@
         </div>
     </header>
 
-    <section class="py-24 bg-gradient-to-r from-purple-200 to-purple-300 text-center">
+    <section class="py-24 bg-gradient-to-r from-primary-100 to-primary-300 text-center">
         <div class="w-[90%] max-w-[1200px] mx-auto px-4">
             <div class="mx-auto max-w-[800px]">
-                <h2 class="text-4xl font-bold mb-6 text-primary">Elepathy 对话列表</h2>
-                <p class="text-lg">{{ description }}</p>
-                <div class="mt-5">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-primary-800 animate-fadeIn">Elepathy 对话列表</h2>
+                <p class="text-lg mb-6">{{ description }}</p>
+                <div class="mt-5 animate-fadeIn" style="animation-delay: 300ms">
                     <a href="{% url 'chat:new_chat' %}"
-                        class="inline-flex items-center gap-2 bg-primary text-white py-3 px-6 rounded font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-md">
+                        class="inline-flex items-center gap-2 bg-primary text-white py-3 px-6 rounded font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-hover">
                         <i class="fas fa-plus"></i> 新建对话
                     </a>
                 </div>
@@ -58,25 +97,46 @@
         </div>
     </section>
 
-    <section id="conversation-list" class="py-24 bg-white">
+    <section id="conversation-list" class="py-16 bg-white">
         <div class="w-[90%] max-w-[1200px] mx-auto px-4">
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {% if conversations %}
                 {% for conv in conversations %}
-                <div class="bg-white rounded shadow-sm p-5 transition hover:shadow-md hover:-translate-y-1 relative"
-                    data-id="{{ conv.id }}">
+                <div class="bg-white rounded shadow-card p-5 border border-gray-100 transition hover:shadow-hover hover:-translate-y-2 relative group animate-fadeIn"
+                    data-id="{{ conv.id }}" data-delay="{{ forloop.counter|add:-1 }}">
                     <div class="mb-2.5">
-                        <h3 class="text-xl font-semibold">{{ conv.title }}</h3>
+                        <h3 class="text-xl font-semibold text-primary mb-1 line-clamp-1">{{ conv.title }}</h3>
                         <span class="text-sm text-gray-500 block mt-1">{{ conv.updated_at|date:"Y-m-d H:i" }}</span>
                     </div>
+                    <p class="text-text opacity-80 mb-4 line-clamp-2">
+                        {{ conv.last_message|default:"暂无消息内容" }}
+                    </p>
+                    <div class="flex items-center justify-between mt-auto pt-4 border-t border-gray-100">
+                        <span class="text-xs text-primary bg-primary-50 px-2 py-1 rounded-full">
+                            {{ conv.message_count|default:"0" }} 条消息
+                        </span>
+                        <div class="flex gap-2">
+                            <a href="{% url 'chat:chat' conv.id %}"
+                                class="text-primary bg-primary-50 p-2 rounded text-sm flex items-center gap-1 transition hover:bg-primary hover:text-white">
+                                <i class="fas fa-comment"></i> 继续对话
+                            </a>
+                            <button
+                                class="bg-red-50 text-red-600 p-2 rounded text-sm flex items-center gap-1 transition hover:bg-red-100 delete-btn"
+                                data-id="{{ conv.id }}">
+                                <i class="fas fa-trash"></i> 删除
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 悬浮操作按钮 -->
                     <div
-                        class="absolute top-0 left-0 w-full h-full bg-black/3 flex items-center justify-center gap-4 opacity-0 hover:opacity-100 transition rounded">
+                        class="absolute top-0 left-0 w-full h-full bg-black/3 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition rounded">
                         <a href="{% url 'chat:chat' conv.id %}"
-                            class="bg-primary text-white py-2 px-5 rounded font-semibold flex items-center gap-2 transition hover:bg-secondary hover:-translate-y-1 hover:shadow-md">
+                            class="bg-primary text-white py-2.5 px-5 rounded font-semibold flex items-center gap-2 transition hover:bg-secondary hover:-translate-y-1 hover:shadow-hover">
                             <i class="fas fa-comment"></i> 继续对话
                         </a>
                         <button
-                            class="bg-[#f8d7da] text-[#721c24] py-2 px-5 rounded font-semibold flex items-center gap-2 transition hover:bg-[#f5c6cb] hover:-translate-y-1 hover:shadow-md delete-btn"
+                            class="bg-red-100 text-red-600 py-2.5 px-5 rounded font-semibold flex items-center gap-2 transition hover:bg-red-200 hover:-translate-y-1 hover:shadow-md delete-btn"
                             data-id="{{ conv.id }}">
                             <i class="fas fa-trash"></i> 删除
                         </button>
@@ -85,34 +145,17 @@
                 {% endfor %}
                 {% else %}
                 <div
-                    class="col-span-full text-center py-16 bg-white rounded shadow-sm flex flex-col items-center justify-center">
+                    class="col-span-full text-center py-16 bg-light-gray rounded shadow-sm flex flex-col items-center justify-center">
                     <div class="text-6xl text-primary opacity-40 mb-8">
                         <i class="fas fa-comments"></i>
                     </div>
-                    <h3 class="text-2xl mb-2.5">没有对话记录</h3>
-                    <p class="mb-6 text-gray-600">开始一个新的对话，探索AI的强大能力</p>
+                    <h3 class="text-2xl mb-2.5 text-primary-800">没有对话记录</h3>
+                    <p class="mb-6 text-text opacity-80 max-w-md mx-auto">开始一个新的对话，探索AI的强大能力，让Elepathy帮助您解决问题、获取信息或创作内容
+                    </p>
                     <a href="{% url 'chat:new_chat' %}"
-                        class="inline-flex items-center gap-2 bg-primary text-white py-3 px-6 rounded font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-md animate-[pulse_2s_infinite]">
+                        class="inline-flex items-center gap-2 bg-primary text-white py-3 px-6 rounded font-semibold transition hover:bg-secondary hover:-translate-y-1 hover:shadow-hover">
                         <i class="fas fa-plus"></i> 新建对话
                     </a>
-                    <style>
-                        @keyframes pulse {
-                            0% {
-                                transform: scale(1);
-                                box-shadow: 0 4px 10px rgba(107, 70, 193, 0.2);
-                            }
-
-                            50% {
-                                transform: scale(1.05);
-                                box-shadow: 0 8px 15px rgba(107, 70, 193, 0.3);
-                            }
-
-                            100% {
-                                transform: scale(1);
-                                box-shadow: 0 4px 10px rgba(107, 70, 193, 0.2);
-                            }
-                        }
-                    </style>
                 </div>
                 {% endif %}
             </div>
@@ -127,25 +170,133 @@
 
     <!-- 删除确认对话框 -->
     <div id="delete-confirm" class="hidden fixed inset-0 bg-black/50 z-[1000] items-center justify-center">
-        <div class="bg-white rounded p-6 w-[90%] max-w-[450px] shadow-lg text-center">
-            <h3 class="mb-4 text-[#721c24]"><i class="fas fa-exclamation-triangle"></i> 确认删除</h3>
+        <div class="bg-white rounded p-6 w-[90%] max-w-[450px] shadow-lg text-center animate-[fadeIn_0.2s_ease-in-out]">
+            <h3 class="mb-4 text-red-600 font-semibold"><i class="fas fa-exclamation-triangle"></i> 确认删除</h3>
             <p class="mb-6 leading-relaxed">您确定要删除这个对话吗？此操作无法撤销，将永久删除所有对话内容。</p>
             <div class="flex justify-center gap-4">
                 <button id="cancel-delete"
-                    class="bg-transparent text-primary border-2 border-primary rounded py-2 px-6 text-center font-semibold transition hover:bg-primary/5">取消</button>
+                    class="bg-transparent text-primary border-2 border-primary rounded py-2 px-6 text-center font-semibold transition hover:bg-primary-50">取消</button>
                 <button id="confirm-delete"
-                    class="bg-[#f8d7da] text-[#721c24] rounded py-2 px-6 text-center font-semibold transition hover:bg-[#f5c6cb] hover:-translate-y-0.5 hover:shadow-md">确认删除</button>
+                    class="bg-red-100 text-red-600 rounded py-2 px-6 text-center font-semibold transition hover:bg-red-200 hover:-translate-y-0.5 hover:shadow-md">确认删除</button>
             </div>
         </div>
     </div>
 
-    <footer class="bg-dark-color text-white py-10 text-center">
+    <footer class="bg-dark-color text-white py-10">
         <div class="container w-[90%] max-w-[1200px] mx-auto px-4">
-            <p class="opacity-80 text-lg">&copy; 2025 Elepathy Teams. All rights reserved.</p>
+            <div class="flex flex-col md:flex-row items-center justify-center md:justify-between mb-8">
+                <div class="mb-6 md:mb-0 flex items-center">
+                    <img src="/static/images/logo/elepathy-logo.webp" alt="Elepathy Logo" class="h-[40px] mr-4">
+                    <h2 class="text-xl font-bold tracking-tighter">Elepathy</h2>
+                </div>
+                <div class="flex gap-6">
+                    <a href="/" class="text-white hover:text-primary-300 transition">首页</a>
+                    <a href="/chat" class="text-white hover:text-primary-300 transition">智能对话</a>
+                    <a href="/tools" class="text-white hover:text-primary-300 transition">工具箱</a>
+                    <a href="/team" class="text-white hover:text-primary-300 transition">关于我们</a>
+                </div>
+                <div class="flex space-x-4 mt-6 md:mt-0">
+                    <a href="https://github.com/WangWindow" target="_blank"
+                        class="w-10 h-10 rounded-full bg-dark-color text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="mailto:1598593280@qq.com"
+                        class="w-10 h-10 rounded-full bg-dark-color text-white flex items-center justify-center text-lg transition hover:bg-white hover:text-dark-color">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 pt-6 text-center">
+                <p class="opacity-80 text-sm">&copy; 2025 Elepathy Teams. All rights reserved.</p>
+            </div>
         </div>
     </footer>
 
-    <script src="/static/chat/conversation.js"></script>
+    <script>
+        // 移动端菜单
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        // 删除对话功能
+        document.addEventListener('DOMContentLoaded', function () {
+            let currentId = null;
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            const deleteConfirm = document.getElementById('delete-confirm');
+            const confirmDelete = document.getElementById('confirm-delete');
+            const cancelDelete = document.getElementById('cancel-delete');
+
+            // 显示删除确认对话框
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    currentId = this.dataset.id;
+                    deleteConfirm.classList.remove('hidden');
+                    deleteConfirm.classList.add('flex');
+                });
+            });
+
+            // 取消删除
+            cancelDelete.addEventListener('click', function () {
+                deleteConfirm.classList.add('hidden');
+                deleteConfirm.classList.remove('flex');
+                currentId = null;
+            });
+
+            // 确认删除
+            confirmDelete.addEventListener('click', function () {
+                if (currentId) {
+                    // 发送删除请求
+                    fetch(`/chat/delete/${currentId}/`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1")
+                        }
+                    })
+                        .then(response => {
+                            if (response.ok) {
+                                // 成功删除，刷新页面
+                                window.location.reload();
+                            } else {
+                                // 处理错误
+                                console.error('删除失败');
+                            }
+                        })
+                        .catch(error => {
+                            console.error('请求错误:', error);
+                        });
+                }
+            });
+        });
+
+        // 添加动画效果
+        document.addEventListener('DOMContentLoaded', function () {
+            // 初始状态
+            document.querySelectorAll('.animate-fadeIn').forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.5s ease-out';
+            });
+
+            // 滚动动画
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('.animate-fadeIn');
+
+                elements.forEach(element => {
+                    const elementPosition = element.getBoundingClientRect().top;
+                    const screenPosition = window.innerHeight;
+
+                    if (elementPosition < screenPosition - 100) {
+                        element.style.opacity = '1';
+                        element.style.transform = 'translateY(0)';
+                    }
+                });
+            };
+
+            // 监听滚动事件
+            window.addEventListener('scroll', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+        });
+    </script>
 </body>
 
 </html>

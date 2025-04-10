@@ -50,7 +50,7 @@ class HomeViewTest(TestCase):
         response = self.client.get(url)
         self.assertContains(response, '<a href="/" class="active">')
         self.assertContains(response, '<a href="/chat">')
-        self.assertContains(response, '<a href="/tools/">')
+        self.assertContains(response, '<a href="/tools">')
         self.assertContains(response, '<a href="/team">')
 
     def test_home_footer(self):
