@@ -28,7 +28,7 @@ def view(request):
 
     context["team_members"] = team_members
 
-    return render(request, "team/html/index.html", context)
+    return render(request, "team/index.html", context)
 
 
 def create_sample_team_members():

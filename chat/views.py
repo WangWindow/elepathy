@@ -21,7 +21,7 @@ def conversation_list(request):
         "description": "您的所有智能对话",
         "conversations": conversations,
     }
-    return render(request, "chat/html/conversation_list.html", context)
+    return render(request, "chat/conversation_list.html", context)
 
 
 def chat_view(request, conversation_id=None):
@@ -58,7 +58,7 @@ def chat_view(request, conversation_id=None):
         "conversations": conversations,
         "messages": messages,
     }
-    return render(request, "chat/html/index.html", context)
+    return render(request, "chat/index.html", context)
 
 
 @csrf_exempt

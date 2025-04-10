@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     "home.apps.HomeConfig",
     "chat.apps.ChatConfig",
     "team.apps.TeamConfig",
-    # "tools.apps.ToolsConfig",
+    "tools.apps.ToolsConfig",
 ]
 
 MIDDLEWARE = [
