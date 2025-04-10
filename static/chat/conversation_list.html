@@ -185,90 +185,119 @@
     </footer>
 
     <script>
-        // 移动端菜单
-        document.getElementById('mobile-menu-button').addEventListener('click', () => {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
+        // 获取DOM元素
+        const deleteConfirmDialog = document.getElementById('delete-confirm');
+        const confirmDeleteBtn = document.getElementById('confirm-delete');
+        const cancelDeleteBtn = document.getElementById('cancel-delete');
+
+        // 当前要删除的对话ID
+        let currentDeleteId = null;
+
+        // 删除按钮事件绑定
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = e.target.closest('.delete-btn').dataset.id;
+                currentDeleteId = id;
+                deleteConfirmDialog.style.display = 'flex';
+            });
         });
 
-        // 删除对话功能
-        document.addEventListener('DOMContentLoaded', function () {
-            let currentId = null;
-            const deleteButtons = document.querySelectorAll('.delete-btn');
-            const deleteConfirm = document.getElementById('delete-confirm');
-            const confirmDelete = document.getElementById('confirm-delete');
-            const cancelDelete = document.getElementById('cancel-delete');
-
-            // 显示删除确认对话框
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    currentId = this.dataset.id;
-                    deleteConfirm.classList.remove('hidden');
-                    deleteConfirm.classList.add('flex');
-                });
+        // 取消删除
+        if (cancelDeleteBtn) {
+            cancelDeleteBtn.addEventListener('click', () => {
+                deleteConfirmDialog.style.display = 'none';
+                currentDeleteId = null;
             });
+        }
 
-            // 取消删除
-            cancelDelete.addEventListener('click', function () {
-                deleteConfirm.classList.add('hidden');
-                deleteConfirm.classList.remove('flex');
-                currentId = null;
-            });
-
-            // 确认删除
-            confirmDelete.addEventListener('click', function () {
-                if (currentId) {
-                    // 发送删除请求
-                    fetch(`/chat/delete/${currentId}/`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRFToken': document.cookie.replace(/(?:(?:^|.*;\s*)csrftoken\s*\=\s*([^;]*).*$)|^.*$/, "$1")
-                        }
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                // 成功删除，刷新页面
-                                window.location.reload();
-                            } else {
-                                // 处理错误
-                                console.error('删除失败');
-                            }
-                        })
-                        .catch(error => {
-                            console.error('请求错误:', error);
-                        });
+        // 点击对话框外部关闭
+        if (deleteConfirmDialog) {
+            deleteConfirmDialog.addEventListener('click', (e) => {
+                if (e.target === deleteConfirmDialog) {
+                    deleteConfirmDialog.style.display = 'none';
+                    currentDeleteId = null;
                 }
             });
-        });
+        }
 
-        // 添加动画效果
-        document.addEventListener('DOMContentLoaded', function () {
-            // 初始状态
-            document.querySelectorAll('.animate-fadeIn').forEach(element => {
-                element.style.opacity = '0';
-                element.style.transform = 'translateY(20px)';
-                element.style.transition = 'all 0.5s ease-out';
-            });
+        // 确认删除
+        if (confirmDeleteBtn) {
+            confirmDeleteBtn.addEventListener('click', async () => {
+                if (!currentDeleteId) {
+                    deleteConfirmDialog.style.display = 'none';
+                    return;
+                }
 
-            // 滚动动画
-            const animateOnScroll = () => {
-                const elements = document.querySelectorAll('.animate-fadeIn');
+                try {
+                    // 显示删除中状态
+                    confirmDeleteBtn.disabled = true;
+                    confirmDeleteBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 删除中...';
 
-                elements.forEach(element => {
-                    const elementPosition = element.getBoundingClientRect().top;
-                    const screenPosition = window.innerHeight;
+                    const response = await fetch(`/chat/${currentDeleteId}/delete/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRFToken': getCsrfToken(),
+                        }
+                    });
 
-                    if (elementPosition < screenPosition - 100) {
-                        element.style.opacity = '1';
-                        element.style.transform = 'translateY(0)';
+                    if (response.ok) {
+                        // 从页面中移除对话卡片并关闭对话框
+                        const card = document.querySelector(`[data-id="${currentDeleteId}"]`);
+                        if (card) {
+                            card.remove();
+                        }
+                        deleteConfirmDialog.style.display = 'none';
+                    } else {
+                        throw new Error('请求失败');
                     }
-                });
-            };
+                } catch (error) {
+                    console.error('删除对话出错:', error);
+                    alert('删除失败，请稍后重试');
+                    deleteConfirmDialog.style.display = 'none';
+                } finally {
+                    // 重置按钮状态
+                    confirmDeleteBtn.disabled = false;
+                    confirmDeleteBtn.innerHTML = '确认删除';
+                    currentDeleteId = null;
+                }
+            });
+        }
 
-            // 监听滚动事件
-            window.addEventListener('scroll', animateOnScroll);
-            window.addEventListener('load', animateOnScroll);
+        // 获取CSRF Token函数
+        function getCsrfToken() {
+            // 从cookie获取CSRF token
+            const cookieValue = document.cookie
+                .split('; ')
+                .find(row => row.startsWith('csrftoken='))
+                ?.split('=')[1];
+
+            return cookieValue || '';
+        }
+
+        // 移动端菜单切换
+        const mobileMenuBtn = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.remove('hidden');
+                } else {
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        // 添加卡片动画延迟
+        document.querySelectorAll('.animate-fadeIn').forEach(card => {
+            const delay = card.dataset.delay || 0;
+            card.style.animationDelay = `${delay * 0.1}s`;
         });
     </script>
 </body>
 
 </html>
+```
