@@ -15,5 +15,16 @@
             "autoStartBrowser": true,
             "program": "${workspaceFolder}/manage.py"
         },
+        {
+            "name": "Migrate: Django",
+            "type": "debugpy",
+            "request": "launch",
+            "args": [
+                "migrate"
+            ],
+            "django": true,
+            "autoStartBrowser": true,
+            "program": "${workspaceFolder}/manage.py"
+        },
     ]
 }
